@@ -3,11 +3,12 @@
 require 'bundler/setup'
 require 'support/configs/simple_cov_config'
 require 'support/configs/vcr_config'
+require 'pry'
+
 SimpleCovConfig.configure
+VCRConfig.configure
 
 require 'katinguele'
-require 'pry'
-VCRConfig.configure
 
 RSpec.configure do |config|
   config.disable_monkey_patching!
