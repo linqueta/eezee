@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'katinguele'
   spec.description   = 'katinguele'
-  spec.homepage      = 'https://https://github.com/linqueta/katinguele'
+  spec.homepage      = 'https://github.com/linqueta/katinguele'
   spec.license       = 'MIT'
 
   spec.files         = Dir['{lib}/**/*', 'CHANGELOG.md', 'MIT-LICENSE', 'README.md']
