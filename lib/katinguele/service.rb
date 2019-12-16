@@ -1,13 +1,17 @@
 # frozen_string_literal: true
 
 module Katinguele
-  class Request
+  class Service
     ACCESSORS = %i[
+      after
+      before
       headers
+      logger
       params
       path
       payload
       protocol
+      raise_error
       url
     ].freeze
 

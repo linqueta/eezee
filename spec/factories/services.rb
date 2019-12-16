@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :request, class: Katinguele::Request do
+  factory :service, class: Katinguele::Service do
     initialize_with { new(attributes) }
 
     headers do

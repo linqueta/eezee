@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Katinguele::Request, type: :model do
+RSpec.describe Katinguele::Service, type: :model do
   describe '#initialize' do
     subject { described_class.new(params) }
 
