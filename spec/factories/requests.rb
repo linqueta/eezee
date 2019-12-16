@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :request, class: Request do
+  factory :request, class: Katinguele::Request do
+    initialize_with { new(attributes) }
+
     headers do
       {
         'User-Agent' => 'Katinguele',
