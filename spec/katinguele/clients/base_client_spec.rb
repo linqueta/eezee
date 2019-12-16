@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Katinguele::Service::Base, type: :model do
+RSpec.describe Katinguele::BaseClient, type: :model do
   describe '.get' do
     subject { described_class.get(build(:request)) }
 
