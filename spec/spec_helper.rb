@@ -3,6 +3,7 @@
 require 'bundler/setup'
 require 'support/configs/simple_cov_config'
 require 'support/configs/vcr_config'
+require 'support/configs/factory_bot_config'
 require 'pry'
 
 SimpleCovConfig.configure
@@ -16,4 +17,6 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  FactoryBotConfig.configure(config)
 end
