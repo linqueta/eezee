@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Katinguele::Service, type: :model do
+RSpec.describe Katinguele::Request, type: :model do
   describe '#initialize' do
     subject { described_class.new(params) }
 
@@ -9,28 +9,6 @@ RSpec.describe Katinguele::Service, type: :model do
         let(:params) { {} }
 
         it { expect { subject }.to raise_error(Katinguele::RequiredFieldError, /url/) }
-      end
-
-      context 'with invalid after' do
-        let(:params) do
-          {
-            url: 'addresses.linqueta.com',
-            after: -> { true }
-          }
-        end
-
-        it { expect { subject }.to raise_error(Katinguele::InvalidValueError, /after/) }
-      end
-
-      context 'with invalid before' do
-        let(:params) do
-          {
-            url: 'addresses.linqueta.com',
-            before: -> { true }
-          }
-        end
-
-        it { expect { subject }.to raise_error(Katinguele::InvalidValueError, /before/) }
       end
     end
 

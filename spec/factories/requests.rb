@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :service, class: Katinguele::Service do
+  factory :request, class: Katinguele::Request do
     initialize_with { new(attributes) }
 
-    after { ->(_service, _response) { true } }
-    before { ->(_service) { nil } }
+    after { ->(_req, _res, _err) { true } }
+    before { ->(_req, _res, _err) { nil } }
     logger { true }
     headers do
       {

@@ -3,33 +3,33 @@
 require 'spec_helper'
 
 RSpec.describe Katinguele::BaseClient, type: :model do
-  describe '.get' do
-    subject { described_class.get(build(:service)) }
+  # describe '.get' do
+  #   subject { described_class.get(build(:request)) }
 
-    it { expect { subject }.to raise_error(Katinguele::NotImplementedError, /get/) }
-  end
+  #   it { expect { subject }.to raise_error(Katinguele::NotImplementedError, /get/) }
+  # end
 
-  describe '.post' do
-    subject { described_class.post(build(:service)) }
+  # describe '.post' do
+  #   subject { described_class.post(build(:request)) }
 
-    it { expect { subject }.to raise_error(Katinguele::NotImplementedError, /post/) }
-  end
+  #   it { expect { subject }.to raise_error(Katinguele::NotImplementedError, /post/) }
+  # end
 
-  describe '.patch' do
-    subject { described_class.patch(build(:service)) }
+  # describe '.patch' do
+  #   subject { described_class.patch(build(:request)) }
 
-    it { expect { subject }.to raise_error(Katinguele::NotImplementedError, /patch/) }
-  end
+  #   it { expect { subject }.to raise_error(Katinguele::NotImplementedError, /patch/) }
+  # end
 
-  describe '.put' do
-    subject { described_class.put(build(:service)) }
+  # describe '.put' do
+  #   subject { described_class.put(build(:request)) }
 
-    it { expect { subject }.to raise_error(Katinguele::NotImplementedError, /put/) }
-  end
+  #   it { expect { subject }.to raise_error(Katinguele::NotImplementedError, /put/) }
+  # end
 
-  describe '.delete' do
-    subject { described_class.delete(build(:service)) }
+  # describe '.delete' do
+  #   subject { described_class.delete(build(:request)) }
 
-    it { expect { subject }.to raise_error(Katinguele::NotImplementedError, /delete/) }
-  end
+  #   it { expect { subject }.to raise_error(Katinguele::NotImplementedError, /delete/) }
+  # end
 end

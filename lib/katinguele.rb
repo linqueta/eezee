@@ -3,8 +3,18 @@
 require 'katinguele/version'
 require 'katinguele/errors'
 require 'katinguele/clients'
-require 'katinguele/service'
+require 'katinguele/request'
 require 'katinguele/logger'
+require 'katinguele/configuration'
 
 module Katinguele
+  class << self
+    def configure
+      yield(configuration)
+    end
+
+    def configuration
+      @configuration ||= Configuration.new
+    end
+  end
 end

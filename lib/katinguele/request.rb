@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Katinguele
-  class Service
+  class Request
     ACCESSORS = %i[
       after
       before
@@ -18,8 +18,8 @@ module Katinguele
     attr_reader :urn
     attr_accessor(*ACCESSORS)
 
-    def initialize(params = {})
-      accessors!(params)
+    def initialize(options = {})
+      accessors!(options)
       validate!
       build_urn!
       handle_query_params!
@@ -30,22 +30,6 @@ module Katinguele
 
     def validate!
       raise Katinguele::RequiredFieldError.new(self.class, :url) unless @url
-
-      validate_hooks!(:after, @after, %i[service response])
-      validate_hooks!(:before, @before, %i[service])
-    end
-
-    def validate_hooks!(name, hook, parameters)
-      return if !hook&.is_a?(Proc) || hook&.parameters&.length == parameters.length
-
-      raise Katinguele::InvalidValueError.new(
-        self.class,
-        name,
-        <<~SNIPPET
-          You should pass #{parameters.length} params in a lambda like:
-          ->(#{parameters.join(', ')}) { do_something!(parameters.join(', ') }
-        SNIPPET
-      )
     end
 
     def accessors!(params)
