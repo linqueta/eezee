@@ -2,7 +2,6 @@
 
 require 'katinguele/version'
 require 'katinguele/errors'
-require 'katinguele/clients'
 require 'katinguele/request'
 require 'katinguele/logger'
 require 'katinguele/configuration'
