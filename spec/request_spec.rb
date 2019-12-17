@@ -22,6 +22,7 @@ RSpec.describe Katinguele::Request, type: :model do
             'User-Agent' => 'Katinguele',
             Token: 'Token 2b173033-45fa-459a-afba-9eea79cb75be'
           },
+          open_timeout: 2,
           params: {
             user_id: 10,
             address_id: 15,
@@ -38,6 +39,7 @@ RSpec.describe Katinguele::Request, type: :model do
           },
           protocol: 'https',
           raise_error: true,
+          timeout: 10,
           url: 'www.linqueta.com'
         }
       end

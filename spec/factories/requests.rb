@@ -13,6 +13,7 @@ FactoryBot.define do
         Token: 'Token 2b173033-45fa-459a-afba-9eea79cb75be'
       }
     end
+    open_timeout { 2 }
     params do
       {
         user_id: 10,
@@ -32,6 +33,7 @@ FactoryBot.define do
     end
     protocol { 'https' }
     raise_error { true }
+    timeout { 10 }
     url { 'www.linqueta.com' }
   end
 end

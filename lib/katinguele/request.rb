@@ -7,11 +7,13 @@ module Katinguele
       before
       headers
       logger
+      open_timeout
       params
       path
       payload
       protocol
       raise_error
+      timeout
       url
     ].freeze
 
