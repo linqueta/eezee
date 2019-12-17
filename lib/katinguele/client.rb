@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
+require_relative 'client/builder'
+
 module Katinguele
   module Client
-    def katinguele_request_options(options)
-      define_singleton_method(:katinguele_request_options) do
-        @katinguele_request_options ||= options
-      end
+    class UnknwonService < StandardError; end
+
+    def self.extended(base)
+      base.send(:extend, Builder)
     end
   end
 end

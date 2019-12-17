@@ -18,15 +18,19 @@ module Katinguele
     attr_accessor(*(ACCESSORS | %i[urn method]))
 
     def initialize(options = {})
-      accessors!(options)
-      validate!
-      build_urn!
-      handle_query_params!
-      handle_urn_params!
+      setup!(options)
     end
 
     def log
       Katinguele::Logger.request(self, @method.to_s.upcase)
+    end
+
+    def setup!(options = {})
+      accessors!(options || {})
+      validate!
+      build_urn!
+      handle_query_params!
+      handle_urn_params!
     end
 
     private
