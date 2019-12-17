@@ -13,12 +13,12 @@ RSpec.describe Katinguele::Configuration, type: :model do
     subject { instance.add_service(name, options) }
 
     let(:instance) { described_class.new }
-    let(:name) { :addresses }
+    let(:name) { :linqueta }
     let(:options) do
       {
         protocol: 'https',
         raise_error: true,
-        url: 'addresses.linqueta.com'
+        url: 'www.linqueta.com'
       }
     end
 
@@ -29,8 +29,8 @@ RSpec.describe Katinguele::Configuration, type: :model do
       expect(instance.services[name]).to have_attributes(
         protocol: 'https',
         raise_error: true,
-        url: 'addresses.linqueta.com',
-        urn: 'https://addresses.linqueta.com'
+        url: 'www.linqueta.com',
+        urn: 'https://www.linqueta.com'
       )
     end
   end

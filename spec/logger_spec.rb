@@ -20,7 +20,7 @@ RSpec.describe Katinguele::Logger, type: :model do
     it 'puts request logs' do
       expect(described_class)
         .to receive(:p)
-        .with('INFO -- request: GET https://addresses.linqueta.com?user=1')
+        .with('INFO -- request: GET https://www.linqueta.com?user=1')
         .once
       expect(described_class)
         .to receive(:p)

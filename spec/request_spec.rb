@@ -38,14 +38,14 @@ RSpec.describe Katinguele::Request, type: :model do
           },
           protocol: 'https',
           raise_error: true,
-          url: 'addresses.linqueta.com'
+          url: 'www.linqueta.com'
         }
       end
 
       it do
         is_expected.to have_attributes(
           params.merge(
-            urn: 'https://addresses.linqueta.com/users/10/addresses/15?state=Sao Paulo&country=Brazil'
+            urn: 'https://www.linqueta.com/users/10/addresses/15?state=Sao Paulo&country=Brazil'
           )
         )
       end

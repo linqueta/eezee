@@ -5,6 +5,7 @@ require 'katinguele/errors'
 require 'katinguele/request'
 require 'katinguele/logger'
 require 'katinguele/configuration'
+require 'katinguele/client'
 
 module Katinguele
   class << self

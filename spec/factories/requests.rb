@@ -32,6 +32,6 @@ FactoryBot.define do
     end
     protocol { 'https' }
     raise_error { true }
-    url { 'addresses.linqueta.com' }
+    url { 'www.linqueta.com' }
   end
 end
