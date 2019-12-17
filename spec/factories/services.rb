@@ -4,6 +4,9 @@ FactoryBot.define do
   factory :service, class: Katinguele::Service do
     initialize_with { new(attributes) }
 
+    after { ->(_service, _response) { true } }
+    before { ->(_service) { nil } }
+    logger { true }
     headers do
       {
         'User-Agent' => 'Katinguele',
@@ -28,6 +31,7 @@ FactoryBot.define do
       }
     end
     protocol { 'https' }
+    raise_error { true }
     url { 'addresses.linqueta.com' }
   end
 end

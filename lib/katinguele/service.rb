@@ -29,7 +29,23 @@ module Katinguele
     private
 
     def validate!
-      raise Katinguele::RequiredFieldError.new(self, :url) unless @url
+      raise Katinguele::RequiredFieldError.new(self.class, :url) unless @url
+
+      validate_hooks!(:after, @after, %i[service response])
+      validate_hooks!(:before, @before, %i[service])
+    end
+
+    def validate_hooks!(name, hook, parameters)
+      return if !hook&.is_a?(Proc) || hook&.parameters&.length == parameters.length
+
+      raise Katinguele::InvalidValueError.new(
+        self.class,
+        name,
+        <<~SNIPPET
+          You should pass #{parameters.length} params in a lambda like:
+          ->(#{parameters.join(', ')}) { do_something!(parameters.join(', ') }
+        SNIPPET
+      )
     end
 
     def accessors!(params)
@@ -42,11 +58,15 @@ module Katinguele
     end
 
     def handle_urn_params!
+      return unless @params.is_a?(Hash)
+
       @params.filter { |k, _v| @urn.include?(":#{k}") }
              .each   { |k, v|  @urn.gsub!(":#{k}", v.to_s) }
     end
 
     def handle_query_params!
+      return unless @params.is_a?(Hash)
+
       @params.reject { |k, _v| @urn.include?(":#{k}") }
              .map    { |k, v|  "#{k}=#{v}" }
              .then   { |array| array.join('&') }

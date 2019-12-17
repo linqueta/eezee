@@ -26,7 +26,7 @@ module Katinguele
       private
 
       def raise_not_implemented_error(method)
-        raise Katinguele::NotImplementedError.new(self, method)
+        raise Katinguele::NotImplementedError.new(self.class, method)
       end
     end
   end

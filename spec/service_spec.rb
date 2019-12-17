@@ -4,15 +4,42 @@ RSpec.describe Katinguele::Service, type: :model do
   describe '#initialize' do
     subject { described_class.new(params) }
 
-    context 'without any params' do
-      let(:params) { {} }
+    context 'without valid params' do
+      context 'without any params' do
+        let(:params) { {} }
 
-      it { expect { subject }.to raise_error(Katinguele::RequiredFieldError, /url/) }
+        it { expect { subject }.to raise_error(Katinguele::RequiredFieldError, /url/) }
+      end
+
+      context 'with invalid after' do
+        let(:params) do
+          {
+            url: 'addresses.linqueta.com',
+            after: -> { true }
+          }
+        end
+
+        it { expect { subject }.to raise_error(Katinguele::InvalidValueError, /after/) }
+      end
+
+      context 'with invalid before' do
+        let(:params) do
+          {
+            url: 'addresses.linqueta.com',
+            before: -> { true }
+          }
+        end
+
+        it { expect { subject }.to raise_error(Katinguele::InvalidValueError, /before/) }
+      end
     end
 
     context 'with all fields' do
       let(:params) do
         {
+          after: ->(_service, _response) { true },
+          before: ->(_service) { nil },
+          logger: true,
           headers: {
             'User-Agent' => 'Katinguele',
             Token: 'Token 2b173033-45fa-459a-afba-9eea79cb75be'
@@ -32,6 +59,7 @@ RSpec.describe Katinguele::Service, type: :model do
             country: 'Brazil'
           },
           protocol: 'https',
+          raise_error: true,
           url: 'addresses.linqueta.com'
         }
       end
