@@ -15,8 +15,7 @@ module Katinguele
       url
     ].freeze
 
-    attr_reader :urn
-    attr_accessor(*ACCESSORS)
+    attr_accessor(*(ACCESSORS | %i[urn method]))
 
     def initialize(options = {})
       accessors!(options)
@@ -24,6 +23,10 @@ module Katinguele
       build_urn!
       handle_query_params!
       handle_urn_params!
+    end
+
+    def log
+      Katinguele::Logger.request(self, @method.to_s.upcase)
     end
 
     private

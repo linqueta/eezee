@@ -5,11 +5,11 @@ RSpec.describe Katinguele::Logger, type: :model do
     subject do
       Katinguele::Logger.request(
         FactoryBot.build(
-          :service,
+          :request,
           path: nil,
           params: { user: 1 },
           headers: { Token: 'Token 2b173033-45fa-459a-afba-9eea79cb75be' },
-          payload: { street: 'Paulist Avenue' }
+          payload: { street: 'Paulista Avenue' }
         ),
         :GET
       )
@@ -28,7 +28,7 @@ RSpec.describe Katinguele::Logger, type: :model do
         .once
       expect(described_class)
         .to receive(:p)
-        .with('INFO -- request: PAYLOAD: {"street":"Paulist Avenue"}')
+        .with('INFO -- request: PAYLOAD: {"street":"Paulista Avenue"}')
         .once
     end
   end

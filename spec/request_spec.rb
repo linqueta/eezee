@@ -51,4 +51,14 @@ RSpec.describe Katinguele::Request, type: :model do
       end
     end
   end
+
+  describe '#log' do
+    subject { request.log }
+
+    let(:request) { build(:request).tap { |r| r.method = :get } }
+
+    after { subject }
+
+    it { expect(Katinguele::Logger).to receive(:request).with(request, 'GET') }
+  end
 end

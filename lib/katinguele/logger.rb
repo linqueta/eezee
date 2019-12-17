@@ -4,23 +4,23 @@ module Katinguele
   module Logger
     module_function
 
-    def request(service, verb)
-      p log("request: #{verb} #{service.urn}")
-      p log("request: HEADERS: #{service.headers.to_json}") if service.headers
-      p log("request: PAYLOAD: #{service.payload.to_json}") if service.payload
+    def request(req, method)
+      p log("request: #{method} #{req.urn}")
+      p log("request: HEADERS: #{req.headers.to_json}") if req.headers
+      p log("request: PAYLOAD: #{req.payload.to_json}") if req.payload
       nil
     end
 
-    # def response(response)
-    #   puts log("response: SUCCESS: #{response.success?}")
-    #   puts log("response: CODE: #{response.code}")
-    #   puts log("response: BODY: #{response.body}")
+    # def response(res)
+    #   puts log("response: SUCCESS: #{res.success?}")
+    #   puts log("response: CODE: #{res.code}")
+    #   puts log("response: BODY: #{res.body}")
     # end
 
-    # def error(error)
-    #   puts log("error: #{error.class}")
-    #   puts log("error: CODE: #{error.code}")
-    #   puts log("error: BODY: #{error.body}")
+    # def error(err)
+    #   puts log("error: #{err.class}")
+    #   puts log("error: CODE: #{err.code}")
+    #   puts log("error: BODY: #{err.body}")
     # end
 
     def log(message)
