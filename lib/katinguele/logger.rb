@@ -5,7 +5,7 @@ module Katinguele
     module_function
 
     def request(req, method)
-      p log("request: #{method} #{req.urn}")
+      p log("request: #{method} #{req.uri}")
       p log("request: HEADERS: #{req.headers.to_json}") if req.headers
       p log("request: PAYLOAD: #{req.payload.to_json}") if req.payload
       nil

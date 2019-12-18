@@ -25,31 +25,31 @@ module Katinguele
       end
 
       def build_katinguele_request_options(options = {})
-        @katinguele_options[:request_options] ||= options
+        katinguele_options[:request_options] ||= options
         build_katinguele_request
       end
 
       def build_katinguele_service(name = nil)
-        @katinguele_options[:service_name] ||= name
+        katinguele_options[:service_name] ||= name
         build_katinguele_request
       end
 
       def build_katinguele_request
         Katinguele.configuration
-                  .find_service(@katinguele_options[:service_name])
+                  .find_service(katinguele_options[:service_name])
                   .then { |service| handle_unknown_service!(service) }
                   .then { |service| create_request(service) }
-                  .then { |request| @katinguele_options[:request] = request }
+                  .then { |request| katinguele_options[:request] = request }
       end
 
       def handle_unknown_service!(service)
-        raise UnknwonService if !service && @katinguele_options[:service_name]
+        raise UnknwonService if !service && katinguele_options[:service_name]
 
         service
       end
 
       def create_request(service)
-        Katinguele.configuration.request_by(service, @katinguele_options[:request_options])
+        Katinguele.configuration.request_by(service, katinguele_options[:request_options])
       end
     end
   end
