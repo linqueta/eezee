@@ -9,6 +9,7 @@ module Katinguele
 
     def initialize(original)
       @original = original
+      treat_timeout! if timeout?
     end
 
     def body
@@ -20,7 +21,11 @@ module Katinguele
     end
 
     def code
-      @code ||= faraday_response? ? @original.status : @original.response[:status]
+      @code ||= faraday_response? ? @original.status : @original.response[:status] unless timeout?
+    end
+
+    def timeout?
+      @original.is_a?(Faraday::TimeoutError)
     end
 
     private
@@ -31,6 +36,12 @@ module Katinguele
 
     def faraday_response?
       @original.is_a?(Faraday::Response)
+    end
+
+    def treat_timeout!
+      @code = nil
+      @body = {}
+      @success = false
     end
   end
 end

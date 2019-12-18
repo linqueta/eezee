@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 module Katinguele
-  class HttpErrorFactory
+  class RequestErrorFactory
     class << self
       def build(response)
+        return TimeoutError.new(response) if response.timeout?
+
         find_by_code(response.code).new(response)
       end
 
@@ -21,7 +23,7 @@ module Katinguele
         when 503      then ServiceUnavailableError
         when 500..599 then ServerError
         else
-          HttpError
+          RequestError
         end
       end
     end
