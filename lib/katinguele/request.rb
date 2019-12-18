@@ -17,7 +17,7 @@ module Katinguele
       url
     ].freeze
 
-    attr_accessor(*(ACCESSORS | %i[urn method]))
+    attr_accessor(*(ACCESSORS | %i[uri method]))
 
     def initialize(options = {})
       setup!(options)
@@ -47,23 +47,23 @@ module Katinguele
     end
 
     def build_urn!
-      @urn = [@protocol, [@url, @path].compact.join('/')].compact.join('://')
+      @uri = [@protocol, [@url, @path].compact.join('/')].compact.join('://')
     end
 
     def handle_urn_params!
       return unless @params.is_a?(Hash)
 
-      @params.filter { |k, _v| @urn.include?(":#{k}") }
-             .each   { |k, v|  @urn.gsub!(":#{k}", v.to_s) }
+      @params.filter { |k, _v| @uri.include?(":#{k}") }
+             .each   { |k, v|  @uri.gsub!(":#{k}", v.to_s) }
     end
 
     def handle_query_params!
       return unless @params.is_a?(Hash)
 
-      @params.reject { |k, _v| @urn.include?(":#{k}") }
+      @params.reject { |k, _v| @uri.include?(":#{k}") }
              .map    { |k, v|  "#{k}=#{v}" }
              .then   { |array| array.join('&') }
-             .then   { |query| @urn = [@urn, query].compact.join('?') }
+             .then   { |query| @uri = [@uri, query].compact.join('?') }
     end
   end
 end

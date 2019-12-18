@@ -30,7 +30,7 @@ RSpec.describe Katinguele::Configuration, type: :model do
         protocol: 'https',
         raise_error: true,
         url: 'www.linqueta.com',
-        urn: 'https://www.linqueta.com'
+        uri: 'https://www.linqueta.com'
       )
     end
   end

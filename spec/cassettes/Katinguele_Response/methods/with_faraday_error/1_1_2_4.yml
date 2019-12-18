@@ -1,0 +1,46 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://rickandmortyapi.com/api/characters
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.17.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Length:
+      - '34'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 18 Dec 2019 17:24:26 GMT
+      Etag:
+      - W/"22-rNAniyb/O2Wq76tLR33CEMwGb6U"
+      Server:
+      - Netlify
+      X-Powered-By:
+      - Express
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Nf-Request-Id:
+      - 1697952b-3af4-4e63-b8fc-2783f5925643-168013980
+    body:
+      encoding: UTF-8
+      string: '{"error":"There is nothing here."}'
+    http_version: 
+  recorded_at: Wed, 18 Dec 2019 17:24:25 GMT
+recorded_with: VCR 5.0.0

@@ -47,7 +47,7 @@ RSpec.describe Katinguele::Request, type: :model do
       it do
         is_expected.to have_attributes(
           params.merge(
-            urn: 'https://www.linqueta.com/users/10/addresses/15?state=Sao Paulo&country=Brazil'
+            uri: 'https://www.linqueta.com/users/10/addresses/15?state=Sao Paulo&country=Brazil'
           )
         )
       end

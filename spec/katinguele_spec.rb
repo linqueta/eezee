@@ -21,7 +21,7 @@ RSpec.describe Katinguele, type: :module do
         protocol: 'https',
         raise_error: true,
         url: 'www.linqueta.com',
-        urn: 'https://www.linqueta.com'
+        uri: 'https://www.linqueta.com'
       )
     end
   end

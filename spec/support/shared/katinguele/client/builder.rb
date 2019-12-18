@@ -42,7 +42,7 @@ shared_examples_for :katinguele_client_builder do |builder|
         expect(request).to have_attributes(raise_error: true,
                                            url: 'https://www.linqueta.com',
                                            headers: { 'Content-Type' => 'application/json' },
-                                           urn: 'https://www.linqueta.com')
+                                           uri: 'https://www.linqueta.com')
       end
       it { expect(service_name).to be_nil }
     end
@@ -87,7 +87,7 @@ shared_examples_for :katinguele_client_builder do |builder|
                                              url: 'www.linqueta.com',
                                              headers: { 'Content-Type' => 'application/json' },
                                              protocol: 'https',
-                                             urn: 'https://www.linqueta.com')
+                                             uri: 'https://www.linqueta.com')
         end
         it { expect(service_name).to eq(:linqueta) }
       end
@@ -129,7 +129,7 @@ shared_examples_for :katinguele_client_builder do |builder|
                                            url: 'www.linqueta.com',
                                            headers: { 'Content-Type' => 'application/json' },
                                            protocol: 'https',
-                                           urn: 'https://www.linqueta.com/about',
+                                           uri: 'https://www.linqueta.com/about',
                                            path: 'about',
                                            logger: true)
       end

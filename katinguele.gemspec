@@ -16,6 +16,8 @@ Gem::Specification.new do |spec|
 
   spec.files         = Dir['{lib}/**/*', 'CHANGELOG.md', 'MIT-LICENSE', 'README.md']
 
+  spec.add_dependency 'faraday', '>= 0.17.0'
+
   spec.add_development_dependency 'bundler', '~> 2.0'
   spec.add_development_dependency 'factory_bot', '>= 5.1.1'
   spec.add_development_dependency 'pry-byebug', '>= 3.7.0'
