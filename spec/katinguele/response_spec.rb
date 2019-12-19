@@ -83,4 +83,19 @@ RSpec.describe Katinguele::Response, type: :model do
       end
     end
   end
+
+  describe '#log' do
+    subject { response.log }
+
+    let(:response) { Katinguele::Response.new(nil) }
+
+    before do
+      allow(response).to receive(:body).and_return(error: 'some error')
+      allow(response).to receive(:code).and_return(400)
+    end
+
+    after { subject }
+
+    it { expect(Katinguele::Logger).to receive(:response).with(response) }
+  end
 end

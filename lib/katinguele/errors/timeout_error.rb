@@ -8,5 +8,9 @@ module Katinguele
       @response = response
       super(response.original)
     end
+
+    def log
+      Katinguele::Logger.error(self)
+    end
   end
 end

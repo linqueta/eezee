@@ -35,6 +35,10 @@ module Katinguele
         @original.is_a?(Faraday::ConnectionFailed)
     end
 
+    def log
+      Katinguele::Logger.response(self)
+    end
+
     private
 
     def parsed_body

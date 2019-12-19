@@ -9,6 +9,10 @@ module Katinguele
       super(build_message)
     end
 
+    def log
+      Katinguele::Logger.error(self)
+    end
+
     private
 
     def build_message

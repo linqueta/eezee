@@ -19,25 +19,30 @@ module Katinguele
       end
 
       def katinguele_client_request(options, method)
-        request = build_final_request(options)
-        request.before!(request)
-        request.method = method
-        request.log if request.logger
+        request = build_final_request(options, method)
 
         build_faraday_client(request)
           .then { |client| build_faraday_request(request, client, method) }
           .then { |response| Katinguele::Response.new(response) }
+          .tap  { |response| response.log if request.logger }
           .tap  { |response| request.after!(request, response, nil) }
       rescue Faraday::Error => e
         response = Katinguele::Response.new(e)
         error = Katinguele::RequestErrorFactory.build(response)
+        error.log if request.logger
         return response if rescue_faraday_error?(request, response, error)
 
         raise error
       end
 
-      def build_final_request(options)
-        Katinguele.configuration.request_by(katinguele_options[:request], options)
+      def build_final_request(options, method)
+        Katinguele.configuration
+                  .request_by(katinguele_options[:request], options)
+                  .tap do |request|
+                    request.before!(request)
+                    request.method = method
+                    request.log if request.logger
+                  end
       end
 
       def rescue_faraday_error?(req, res, err)
