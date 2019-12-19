@@ -5,7 +5,6 @@ require 'spec_helper'
 RSpec.describe Katinguele::TimeoutError, type: :model do
   describe '#log' do
     subject { error.log }
-
     let(:error) { described_class.new(response) }
     let(:response) { Katinguele::Response.new(nil) }
 

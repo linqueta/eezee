@@ -8,8 +8,6 @@ require 'support/shared/katinguele/client/builder'
 require 'support/shared/katinguele/client/requester/get'
 require 'support/shared/katinguele/client/requester/post'
 require 'pry'
-require 'dotenv'
-Dotenv.load('.env.test')
 
 SimpleCovConfig.configure
 VCRConfig.configure
