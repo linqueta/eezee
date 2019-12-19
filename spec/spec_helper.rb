@@ -7,6 +7,7 @@ require 'support/configs/factory_bot_config'
 require 'support/shared/katinguele/client/builder'
 require 'support/shared/katinguele/client/requester/get'
 require 'support/shared/katinguele/client/requester/post'
+require 'support/shared/katinguele/client/requester/patch'
 require 'pry'
 
 SimpleCovConfig.configure

@@ -105,6 +105,4 @@ RSpec.describe Katinguele::Logger, type: :model do
         .once
     end
   end
-
-
 end
