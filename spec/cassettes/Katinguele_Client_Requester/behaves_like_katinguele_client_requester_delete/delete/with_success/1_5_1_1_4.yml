@@ -1,0 +1,65 @@
+---
+http_interactions:
+- request:
+    method: delete
+    uri: https://jsonplaceholder.typicode.com/todos/1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v0.17.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 19 Dec 2019 16:50:34 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '2'
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=d07dd76184a3b8852de5a7bfe219063be1576774232; expires=Sat, 18-Jan-20
+        16:50:32 GMT; path=/; domain=.typicode.com; HttpOnly; SameSite=Lax
+      X-Powered-By:
+      - Express
+      Vary:
+      - Origin, Accept-Encoding
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      X-Content-Type-Options:
+      - nosniff
+      Etag:
+      - W/"2-vyGp6PvFo4RvsFtPoIWeCReyIC8"
+      Via:
+      - 1.1 vegur
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 547ae0491d51f65f-GRU
+    body:
+      encoding: UTF-8
+      string: "{}"
+    http_version: 
+  recorded_at: Thu, 19 Dec 2019 16:50:33 GMT
+recorded_with: VCR 5.0.0

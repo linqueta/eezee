@@ -9,6 +9,7 @@ require 'support/shared/katinguele/client/requester/get'
 require 'support/shared/katinguele/client/requester/post'
 require 'support/shared/katinguele/client/requester/patch'
 require 'support/shared/katinguele/client/requester/put'
+require 'support/shared/katinguele/client/requester/delete'
 require 'pry'
 
 SimpleCovConfig.configure
