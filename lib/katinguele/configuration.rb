@@ -19,9 +19,7 @@ module Katinguele
     end
 
     def request_by(request, options)
-      return request.tap { request.setup!(options) } if request
-
-      Request.new(options) if options&.any?
+      Request.new((request&.attributes || {}).merge(options || {}))
     end
   end
 end
