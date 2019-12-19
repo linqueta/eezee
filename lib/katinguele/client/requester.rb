@@ -21,6 +21,8 @@ module Katinguele
       def katinguele_client_request(options, method)
         request = build_final_request(options)
         request.before!(request)
+        request.method = method
+        request.log if request.logger
 
         build_faraday_client(request)
           .then { |client| build_faraday_request(request, client, method) }

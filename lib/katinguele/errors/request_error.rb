@@ -19,7 +19,7 @@ module Katinguele
   class BadRequestError < RequestError; end
   class UnauthorizedError < RequestError; end
   class ForbiddenError < RequestError; end
-  class ResourceNotFound < RequestError; end
+  class ResourceNotFoundError < RequestError; end
   class UnprocessableEntityError < RequestError; end
   class ClientError < RequestError; end
   class InternalServerError < RequestError; end

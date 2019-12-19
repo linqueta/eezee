@@ -5,8 +5,11 @@ require 'support/configs/simple_cov_config'
 require 'support/configs/vcr_config'
 require 'support/configs/factory_bot_config'
 require 'support/shared/katinguele/client/builder'
-require 'support/shared/katinguele/client/requester'
+require 'support/shared/katinguele/client/requester/get'
+require 'support/shared/katinguele/client/requester/post'
 require 'pry'
+require 'dotenv'
+Dotenv.load('.env.test')
 
 SimpleCovConfig.configure
 VCRConfig.configure

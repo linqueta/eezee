@@ -39,7 +39,7 @@ RSpec.describe Katinguele::RequestErrorFactory, type: :model do
       context 'with resource not found' do
         let(:code) { 404 }
 
-        it { is_expected.to be_a(Katinguele::ResourceNotFound) }
+        it { is_expected.to be_a(Katinguele::ResourceNotFoundError) }
       end
 
       context 'with unprocessable entity' do
