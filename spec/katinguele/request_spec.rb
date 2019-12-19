@@ -63,4 +63,41 @@ RSpec.describe Katinguele::Request, type: :model do
 
     it { expect(Katinguele::Logger).to receive(:request).with(request, 'GET') }
   end
+
+  describe '#attributes' do
+    subject { request.attributes }
+
+    let(:request) { build(:request) }
+
+    it do
+      is_expected.to eq(
+        after: nil,
+        before: nil,
+        logger: true,
+        headers: {
+          'User-Agent' => 'Katinguele',
+          Token: 'Token 2b173033-45fa-459a-afba-9eea79cb75be'
+        },
+        open_timeout: 2,
+        params: {
+          user_id: 10,
+          address_id: 15,
+
+          state: 'Sao Paulo',
+          country: 'Brazil'
+        },
+        path: 'users/:user_id/addresses/:address_id',
+        payload: {
+          street: 'Paulista Avenue',
+          number: '123',
+          state: 'Sao Paulo',
+          country: 'Brazil'
+        },
+        protocol: 'https',
+        raise_error: true,
+        timeout: 10,
+        url: 'www.linqueta.com'
+      )
+    end
+  end
 end

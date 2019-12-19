@@ -7,6 +7,7 @@ module Katinguele
     module Builder
       def self.extended(base)
         base.send(:build_katinguele_options)
+        base.send(:build_katinguele_request_attributes)
         base.katinguele_options
       end
 
@@ -40,7 +41,11 @@ module Katinguele
                   .then { |service| handle_unknown_service!(service) }
                   .then { |service| create_request(service) }
                   .then { |request| katinguele_options[:request] = request }
-                  .then { |request| katinguele_options[:request_all_options] = request&.attributes || {} }
+        build_katinguele_request_attributes
+      end
+
+      def build_katinguele_request_attributes
+        define_singleton_method(:katinguele_request_attributes) { katinguele_options&.[](:request)&.attributes }
       end
 
       def handle_unknown_service!(service)
