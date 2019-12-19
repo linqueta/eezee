@@ -15,7 +15,6 @@ RSpec.describe Katinguele, type: :module do
 
     before { subject }
 
-    it { expect(described_class.configuration.services.length).to eq(1) }
     it do
       expect(described_class.configuration.services[:linqueta]).to have_attributes(
         protocol: 'https',

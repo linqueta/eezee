@@ -35,7 +35,21 @@ module Katinguele
       handle_urn_params!
     end
 
+    def before!(*params)
+      hook!(:before, params)
+    end
+
+    def after!(*params)
+      hook!(:after, params)
+    end
+
     private
+
+    def hook!(hook, params)
+      return unless send(hook)&.is_a?(Proc)
+
+      send(hook).call(*params[0..(send(hook).parameters.length - 1)])
+    end
 
     def validate!
       raise Katinguele::RequiredFieldError.new(self.class, :url) unless @url
@@ -55,6 +69,7 @@ module Katinguele
 
       @params.filter { |k, _v| @uri.include?(":#{k}") }
              .each   { |k, v|  @uri.gsub!(":#{k}", v.to_s) }
+             .then   { @uri.gsub!(/:[a-z_-]+/, '') }
     end
 
     def handle_query_params!
@@ -63,6 +78,7 @@ module Katinguele
       @params.reject { |k, _v| @uri.include?(":#{k}") }
              .map    { |k, v|  "#{k}=#{v}" }
              .then   { |array| array.join('&') }
+             .then   { |query| query unless query.empty? }
              .then   { |query| @uri = [@uri, query].compact.join('?') }
     end
   end
