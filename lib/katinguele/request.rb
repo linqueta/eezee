@@ -27,6 +27,10 @@ module Katinguele
       Katinguele::Logger.request(self, @method.to_s.upcase)
     end
 
+    def attributes
+      ACCESSORS.each_with_object({}) { |accessor, obj| obj[accessor] = send(accessor) }
+    end
+
     def setup!(options = {})
       accessors!(options || {})
       validate!

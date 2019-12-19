@@ -40,6 +40,7 @@ module Katinguele
                   .then { |service| handle_unknown_service!(service) }
                   .then { |service| create_request(service) }
                   .then { |request| katinguele_options[:request] = request }
+                  .then { |request| katinguele_options[:request_all_options] = request&.attributes || {} }
       end
 
       def handle_unknown_service!(service)
