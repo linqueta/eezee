@@ -17,6 +17,14 @@ module Katinguele
       url
     ].freeze
 
+    DEFAULT = {
+      headers: {},
+      logger: false,
+      params: {},
+      payload: {},
+      raise_error: false
+    }.freeze
+
     attr_accessor(*(ACCESSORS | %i[uri method]))
 
     def initialize(options = {})
@@ -31,14 +39,6 @@ module Katinguele
       ACCESSORS.each_with_object({}) { |accessor, obj| obj[accessor] = send(accessor) }
     end
 
-    def setup!(options = {})
-      accessors!(options || {})
-      validate!
-      build_urn!
-      handle_query_params!
-      handle_urn_params!
-    end
-
     def before!(*params)
       hook!(:before, params)
     end
@@ -48,6 +48,14 @@ module Katinguele
     end
 
     private
+
+    def setup!(options = {})
+      accessors!(DEFAULT.merge(options || {}))
+      validate!
+      build_urn!
+      handle_query_params!
+      handle_urn_params!
+    end
 
     def hook!(hook, params)
       return unless send(hook)&.is_a?(Proc)
