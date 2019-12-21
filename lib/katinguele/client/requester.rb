@@ -36,6 +36,8 @@ module Katinguele
       end
 
       def build_final_request(options, method)
+        build_katinguele_request_lazy
+
         Katinguele.configuration
                   .request_by(katinguele_options[:request], options)
                   .tap do |request|
@@ -43,6 +45,12 @@ module Katinguele
                     request.method = method
                     request.log if request.logger
                   end
+      end
+
+      def build_katinguele_request_lazy
+        return unless katinguele_options.dig(:service_options, :lazy)
+
+        build_katinguele_request(true)
       end
 
       def rescue_faraday_error?(req, res, err)

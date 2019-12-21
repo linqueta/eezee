@@ -57,7 +57,7 @@ shared_examples_for :katinguele_client_builder do |builder|
           end
         end
 
-        it { expect { klass }.to raise_error(Katinguele::Client::UnknwonService) }
+        it { expect { klass }.to raise_error(Katinguele::Client::UnknownService) }
       end
 
       context 'with known service' do
