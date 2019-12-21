@@ -53,7 +53,7 @@ shared_examples_for :katinguele_client_requester_delete do |requester|
       context 'with raise error option' do
         context 'with timeout' do
           context 'without after' do
-            let(:options) { { raise_error: true, timeout: 0.1 } }
+            let(:options) { { raise_error: true, timeout: 0.01 } }
 
             it { expect { subject }.to raise_error(Katinguele::TimeoutError) }
           end
@@ -63,7 +63,7 @@ shared_examples_for :katinguele_client_requester_delete do |requester|
               let(:options) do
                 {
                   raise_error: true,
-                  timeout: 0.1,
+                  timeout: 0.01,
                   after: ->(_req, _res, _err) { true }
                 }
               end
@@ -79,7 +79,7 @@ shared_examples_for :katinguele_client_requester_delete do |requester|
               let(:options) do
                 {
                   raise_error: true,
-                  timeout: 0.1,
+                  timeout: 0.01,
                   after: ->(_req, _res, _err) { false }
                 }
               end
@@ -106,7 +106,7 @@ shared_examples_for :katinguele_client_requester_delete do |requester|
 
       context 'without raise error option' do
         context 'with timeout' do
-          let(:options) { { path: 'todosa/a', timeout: 0.1 } }
+          let(:options) { { path: 'todosa/a', timeout: 0.01 } }
 
           it { is_expected.to be_a(Katinguele::Response) }
           it { expect(success).to be_falsey }
