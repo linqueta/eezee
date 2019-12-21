@@ -58,7 +58,7 @@ shared_examples_for :katinguele_client_requester_get do |requester|
       context 'with raise error option' do
         context 'with timeout' do
           context 'without after' do
-            let(:options) { { params: { character_id: 'a' }, raise_error: true, timeout: 0.1 } }
+            let(:options) { { params: { character_id: 'a' }, raise_error: true, timeout: 0.01 } }
 
             it { expect { subject }.to raise_error(Katinguele::TimeoutError) }
           end
@@ -69,7 +69,7 @@ shared_examples_for :katinguele_client_requester_get do |requester|
                 {
                   params: { character_id: 'a' },
                   raise_error: true,
-                  timeout: 0.1,
+                  timeout: 0.01,
                   after: ->(_req, _res, _err) { true }
                 }
               end
@@ -86,7 +86,7 @@ shared_examples_for :katinguele_client_requester_get do |requester|
                 {
                   params: { character_id: 'a' },
                   raise_error: true,
-                  timeout: 0.1,
+                  timeout: 0.01,
                   after: ->(_req, _res, _err) { false }
                 }
               end
@@ -105,7 +105,7 @@ shared_examples_for :katinguele_client_requester_get do |requester|
 
       context 'without raise error option' do
         context 'with timeout' do
-          let(:options) { { params: { character_id: 'a' }, timeout: 0.1 } }
+          let(:options) { { params: { character_id: 'a' }, timeout: 0.01 } }
 
           it { is_expected.to be_a(Katinguele::Response) }
           it { expect(success).to be_falsey }

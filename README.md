@@ -33,9 +33,9 @@ The gem is available as open source under the terms of the [MIT License][mit_lic
 [contributor_convenant_page]: http://contributor-covenant.org
 [travis_status_image]: https://travis-ci.org/linqueta/katinguele.svg?branch=master
 [travis_page]: https://travis-ci.org/linqueta/katinguele
-[code_climate_maintainability_image]: https://api.codeclimate.com/v1/badges/2b9a2174ac460c3f44ad/maintainability
+[code_climate_maintainability_image]: https://api.codeclimate.com/v1/badges/b3ae18295c290b6a92a9/maintainability
 [code_climate_maintainability_page]: https://codeclimate.com/github/linqueta/katinguele/maintainability
-[code_climate_test_coverage_image]: https://api.codeclimate.com/v1/badges/2b9a2174ac460c3f44ad/test_coverage
+[code_climate_test_coverage_image]: https://api.codeclimate.com/v1/badges/b3ae18295c290b6a92a9/test_coverage
 [code_climate_test_coverage_page]: https://codeclimate.com/github/linqueta/katinguele/test_coverage
 [gem_version_image]: https://badge.fury.io/rb/katinguele.svg
 [gem_version_page]: https://rubygems.org/gems/katinguele
