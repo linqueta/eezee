@@ -20,13 +20,13 @@ module Katinguele
     def success?
       return false if timeout?
 
-      @success ||= faraday_response? && @original&.success?
+      @success ||= success_response? && @original&.success?
     end
 
     def code
       return if timeout?
 
-      @code ||= faraday_response? ? @original.status : @original.response[:status]
+      @code ||= success_response? ? @original.status : @original.response[:status]
     end
 
     def timeout?
@@ -42,11 +42,19 @@ module Katinguele
     private
 
     def parsed_body
-      JSON.parse(faraday_response? ? @original.body : @original.response[:body], symbolize_names: true)
+      JSON.parse(handled_faraday_response, symbolize_names: true)
     end
 
-    def faraday_response?
+    def success_response?
       @original.is_a?(Faraday::Response)
+    end
+
+    def handled_faraday_response
+      faraday_response.nil? || faraday_response.empty? ? '{}' : faraday_response
+    end
+
+    def faraday_response
+      success_response? ? @original.body : @original.response[:body]
     end
   end
 end

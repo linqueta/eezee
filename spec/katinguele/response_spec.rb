@@ -45,6 +45,22 @@ RSpec.describe Katinguele::Response, type: :model do
         it { expect(original).to eq(param) }
         it { expect(timeout).to be_falsey }
       end
+
+      context 'with faraday null response' do
+        let(:param) { Faraday.get('https://rickandmortyapi.com/api/characters') }
+
+        before { allow_any_instance_of(described_class).to receive(:faraday_response) }
+
+        it { expect(body).to eq({}) }
+      end
+
+      context 'with faraday empty response' do
+        let(:param) { Faraday.get('https://rickandmortyapi.com/api/characters') }
+
+        before { allow_any_instance_of(described_class).to receive(:faraday_response).and_return('') }
+
+        it { expect(body).to eq({}) }
+      end
     end
 
     context 'with faraday error' do
@@ -62,9 +78,9 @@ RSpec.describe Katinguele::Response, type: :model do
         end
       end
 
-      context 'without timeout error' do
-        let(:timeout_param) { 10 }
+      let(:timeout_param) { 10 }
 
+      context 'without timeout error' do
         it { expect(body).to eq(error: 'There is nothing here.') }
         it { expect(success).to be_falsey }
         it { expect(code).to eq(404) }
@@ -80,6 +96,18 @@ RSpec.describe Katinguele::Response, type: :model do
         it { expect(code).to eq(nil) }
         it { expect(original).to eq(param) }
         it { expect(timeout).to be_truthy }
+      end
+
+      context 'with faraday null response' do
+        before { allow_any_instance_of(described_class).to receive(:faraday_response) }
+
+        it { expect(body).to eq({}) }
+      end
+
+      context 'with faraday empty response' do
+        before { allow_any_instance_of(described_class).to receive(:faraday_response).and_return('') }
+
+        it { expect(body).to eq({}) }
       end
     end
   end
