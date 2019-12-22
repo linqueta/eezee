@@ -17,6 +17,7 @@ With Katinguele you can do these things:
   * Raise errors in failed requests
   * Spend more time coding your API integrations instead defining and testing HTTP settings and clients
 
+This gem is supported for Ruby 2.6+ applications
 
 ## Table of Contents
 - [Getting started](#getting-started)
