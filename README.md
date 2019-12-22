@@ -70,11 +70,11 @@ Eezee supports these HTTP methods:
 
 And here are the corresponding Eezee's HTTP methods:
 
-- get(request_options)
-- post(request_options)
-- patch(request_options)
-- put(request_options)
-- delete(request_options)
+- `get(request_options)`
+- `post(request_options)`
+- `patch(request_options)`
+- `put(request_options)`
+- `delete(request_options)`
 
 OBS: The param `request_options` is optional.
 
