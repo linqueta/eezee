@@ -226,7 +226,15 @@ About the method `add_service`, you can pass all of [Available Request options](
 
 ### Request
 
-In [Hooks](#hooks), you always receive the param request and it is an instance of `Eezee::Request`. It has the same accessors than [Available Request options](#available-request-options).
+In [Hooks](#hooks), you always receive the param request and it is an instance of `Eezee::Request`. [Available Request options](#available-request-options) are the accessors of `Eezee::Request`, just call for the name, like:
+
+```ruby
+request.protocol
+# => :https
+
+request.url
+# => "rickandmortyapi.com/api"
+```
 
 ### Response
 
