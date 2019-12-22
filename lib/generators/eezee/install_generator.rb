@@ -25,7 +25,7 @@ module Eezee
 
             # All available options is on README
           end
-          EEZEE_INITIALIZER_TEXT
+        EEZEE_INITIALIZER_TEXT
       )
     end
   end
