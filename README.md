@@ -21,8 +21,6 @@ With Eezee you can do these things:
 
 This gem is supported for Ruby 2.6+ applications.
 
-
-
 ## Table of Contents
 - [Getting started](#getting-started)
   - [Installation](#installation)
@@ -32,7 +30,7 @@ This gem is supported for Ruby 2.6+ applications.
     - [Available Request options](#available-request-options)
   - [Services](#services)
     - [How a service works](#how-a-service-works)
-  - [Request](#response)
+  - [Request](#request)
   - [Response](#response)
   - [Errors](#errors)
   - [Examples](#examples)
@@ -220,21 +218,64 @@ end
 
 #### How a service works
 
-When Ruby loads a class/module and it has the method `eezee_service` declared with a service's name, by default, Eezee will try load the service and create a request base for the class/module, so, when the class/module takes a request, Eezee will create the final request instance based on request base to take the HTTP request. You can turn it lazy setting the option `lazy: true`, therefore, the final request will be created just in the HTTP request. If the service doesn't exist when Eezee search about it, it will be raised the error `Eezee::Client::UnknownService`.
+When Ruby loads a class/module and it has the method `eezee_service` declared with a service's name, by default, Eezee will try load the service and create a request base for the class/module, so, when the class/module takes a request, Eezee will create the final request instance based on request base to take the HTTP request. You can turn it lazy setting the option `lazy: true`, therefore, the final request will be created just in the HTTP request. If the service doesn't exist when Eezee search about it, it will be raised the error `Eezee::Client::UnknownServiceError`.
 
 About the method `add_service`, you can pass all of [Available Request options](#available-request-options). The meaning of this part is to organize in one way the external services integrations.
 
 ### Request
 
-Coming soon...
+In [Hooks](#hooks), you always receive the param request and it is an instance of `Eezee::Request`. [Available Request options](#available-request-options) are the accessors of `Eezee::Request`, just call for the name, like:
+
+```ruby
+request.protocol
+# => :https
+
+request.url
+# => "rickandmortyapi.com/api"
+```
 
 ### Response
 
-Coming soon...
+In [Hooks](#hooks) and the return of the request you have an instance of `Eezee::Response`. This class can be used for successful and failed requests. Here are all methods you can call from a response:
+
+| Name | Type | What is it? |
+|------|------|-------------|
+| `original` | `Faraday::Response`, `Faraday::Error`, `Faraday::TimeoutError`, `Faraday::ConnectionFailed` or `Net::ReadTimeout` | The instance that made the `Eezee::Response`. |
+| `body` | `Hash` | The body response. It always is an instance of Hash (symbolized). If the response doesn't have a body response, the value will be `{}`. |
+| `success?` | Boolean (`TrueClass` or `FalseClass`) | If the request had a timeout error or response has the code 400+ the value will be `false`, else, the value will be `true`. |
+| `code` | `Integer` or `NilClass` | If the request had a timeout error the value will be `nil`, else, the value will be an integer. |
+| `timeout?` | Boolean (`TrueClass` or `FalseClass`) | If the request had a timeout error. |
 
 ### Errors
 
-Coming soon...
+Eezee can raise errors in some situations:
+  - When the specified service is unknown
+  - When the request got a timeout
+  - When the request got a failure response
+
+#### When the specified service is unknown
+  - `Eezee::Client::UnknownServiceError`
+
+#### When the request got a timeout
+  - `Eezee::TimeoutError`
+
+**Important**: This case happens just if the request option `raise_error` is `true`.
+
+#### When the request got a failure response
+  - `Eezee::RequestError` for all errors (ancestor of all below)
+  - `Eezee::BadRequestError` for code equals 400
+  - `Eezee::UnauthorizedError` for code equals 401
+  - `Eezee::ForbiddenError` for code equals 403
+  - `Eezee::ResourceNotFoundError` for code equals 404
+  - `Eezee::UnprocessableEntityError` for code equals 422
+  - `Eezee::ClientError` for code between 400 and 499
+  - `Eezee::InternalServerError` for code equals 500
+  - `Eezee::ServiceUnavailableError` for code equals 503
+  - `Eezee::ServerError` for code between 500 and 599
+
+All of `Eezee::RequestError` has the accessor `@response` with an instace of `Eezee::Response`.
+
+**Important**: This case happens just if the request option `raise_error` is `true`.
 
 ### Examples
 

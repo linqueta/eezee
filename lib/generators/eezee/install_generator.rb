@@ -7,7 +7,7 @@ module Eezee
     def create_initializer_file
       create_file(
         'config/initializers/eezee.rb',
-        <<~KATINGUELE_INITIALIZER_TEXT
+        <<~EEZEE_INITIALIZER_TEXT
           # frozen_string_literal: true
 
           Eezee.configure do |config|
@@ -25,7 +25,7 @@ module Eezee
 
             # All available options is on README
           end
-        KATINGUELE_INITIALIZER_TEXT
+        EEZEE_INITIALIZER_TEXT
       )
     end
   end

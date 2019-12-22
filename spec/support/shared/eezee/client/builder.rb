@@ -57,7 +57,7 @@ shared_examples_for :eezee_client_builder do |builder|
           end
         end
 
-        it { expect { klass }.to raise_error(Eezee::Client::UnknownService) }
+        it { expect { klass }.to raise_error(Eezee::Client::UnknownServiceError) }
       end
 
       context 'with known service' do
