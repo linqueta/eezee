@@ -7,13 +7,169 @@
 
 The easiest HTTP client for Ruby
 
-## Installation
+With Katinguele you can do this things:
+  * Define external services in a initializer file and use them through a simple method
+  * Take HTTP requests just extend a module and call the http request verb
+  * Set before and after hooks to handle your requests, responses and errors
+  * Handle all requests, responses and errors in the same way
+  * Log the request, response and errors
+  * Set general request timeout and open connection timeout
+  * Raise errors in failures
+  * Spend much time coding your API integrations instead defining and testing HTTP client's settings and clients
+
+## Table of Contents
+- [Getting started](#getting-started)
+  - [Installation](#installation)
+  - [Supported HTTP Methods](#supported-http-methods)
+  - [Request Options](#request-options)
+  - [Services](#services)
+  - [Request](#response)
+  - [Response](#response)
+  - [Errors](#errors)
+  - [Examples](#examples)
+    - [Hooks](#hooks)
+    - [Logging](#logging)
+- [Why use it instead Faraday](#why-use-it-instead-faraday)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Getting started
+
+### Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
 gem 'katinguele'
 ```
+
+If you're on Ruby and Rails app, you can run this line below to create the initializer:
+
+```shell
+rails generator katinguele:install
+```
+
+### Supported HTTP Methods
+
+Katinguele supports these HTTP methods:
+
+- GET
+- POST
+- PATCH
+- PUT
+- DELETE
+
+### Request Options
+
+Request options are the request settings. They can be used to define services, request options and as a param when you take the HTTP request. For example:
+
+```ruby
+module RickMorty::Resource::Character
+  extend Katinguele::Client
+
+  katinguele_request_options protocol: :https,
+                             url: 'rickandmortyapi.com/api'
+                             path: 'character/:character_id'
+
+  def self.index
+    get
+  end
+
+  def self.find(id)
+    get(params: { character_id: id })
+  end
+
+  def self.update(id, payload)
+    put(
+      params: { character_id: id },
+      payload: payload,
+      after: ->(_req, res) { do_something!(res) }
+    )
+  end
+end
+```
+
+When the methods `get` or `put` were called, Katinguele will create a Request setting with the options defined in the module and merge with the options passed as a param in the methods.
+
+Here are the list of available options and about them:
+| Option | Required | Default | What is it? | Example |
+|--------|----------|---------|-------------|---------|
+| `url` | Yes | `nil` | The request's url | `"rickandmortyapi.com/api"` |
+| `protocol` | No | `nil` | The request's protocol | `:https` |
+| `path` | No | `nil` | The resource's path | `"characters\:characted_id\addresses"` |
+| `headers` | No | `{}` | The request's headers. | `{ Token: "Bearer 1a8then..." }` |
+| `params` | No | `{}` | The query params. If the url or path has a nested param like `:character_id` and you pass it in the hash, this value will be replaced. In the opposite, the value will be concatenated in the url like `...?character_id=10&...`| `{ character_id: 10 }`|
+| `payload` | No | `{}` | The request's payload | `{ name: "Linqueta", gender: "male" }` |
+| `before` | No | `nil` | It's the before hook. You can pass Proc or Lambda to handle the request settings. See more in [Hooks](#hooks).  | `->(req) { merge_new_headers! }` |
+| `after` | No | `nil` | It's the after hook. You can pass Proc or Lambda to handle the request settings, response or error after the request. If it return a valid value (different of false or `nil`) and the request raise an error, the error won't raised to you application. See more in [Hooks](#hooks). | `->(req, res, err) { do_something! }` |
+| `timeout` | No | `nil` | If it exceed this timeout to make whole request Katinguele will raise the error `Katinguele::TimeoutError` | `5` |
+| `open_timeout` | No | `nil` | If it exceed this timeout to open a connection Katinguele will raise the error `Katinguele::TimeoutError` | `2` |
+| `raise_error` | No | `false` | If you want that Katinguele raises an error if the request has wasn't successful. See more in [Errors](#errors) | `true` |
+| `logger` | No | `false` | If you want to log the request, response and error | `true` |
+
+### Services
+
+It's common your app has integrations with many external service and this gem has a feature to organize in one file the settings of these external service integrations and it provides an easy way to get this settings.
+
+For example, I want to integrate with [Rick and Morty Api](https://rickandmortyapi.com/api/):
+
+I'll declare it in an initializer file:
+
+```ruby
+Katinguele.configure do |config|
+  config.add_service :rick_morty_api,
+                     protocol: :https,
+                     logger: true,
+                     url: 'rickandmortyapi.com/api'
+end
+```
+
+In my resource, I'll catch the service and pass other settings:
+
+```ruby
+module RickMorty::Resource::Character
+  extend Katinguele::Client
+
+  katinguele_service :rick_morty_api
+  katinguele_request_options path: 'character/:character_id'
+
+  def self.index
+    get
+  end
+
+  def self.find(id)
+    get(params: { character_id: id })
+  end
+end
+```
+
+Trying:
+
+```ruby
+RickMorty::Resource::Character.index
+# "INFO -- request: GET https://rickandmortyapi.com/api/character/"
+# "INFO -- request: HEADERS: {}"
+# "INFO -- request: PAYLOAD: {}"
+# "INFO -- response: SUCCESS: true"
+# "INFO -- response: TIMEOUT: false"
+# "INFO -- response: CODE: 200"
+# "INFO -- response: BODY: {\"info\":{\"count\": :493,\"pages\":25,\"next\":\"https://rickan...
+
+RickMorty::Resource::Character.find(7)
+# "INFO -- request: GET https://rickandmortyapi.com/api/character/7"
+# "INFO -- request: HEADERS: {}"
+# "INFO -- request: PAYLOAD: {}"
+# "INFO -- response: SUCCESS: true"
+# "INFO -- response: TIMEOUT: false"
+# "INFO -- response: CODE: 200"
+# "INFO -- response: BODY: {\"id\":7,\"name\":\"Abradolf Lincler\",\"status\":\"unknown\",...
+```
+
+#### How Katinguele's services work:
+
+When Ruby loads a class/module and it has the method `katinguele_service` declared with a service's name, by default, Katinguele will try load the service and create a request base for the class/module, so, when the class/module take an request, Katinguele will create the final request instance based on request base to take the HTTP request. You can turn it lazy setting the option `lazy: true`, therefore, the final request will be created just in the HTTP request. If the service doesn't exist when Katinguele search it, will be raised the error `Katinguele::Client::UnknownService`.
+
+About the method `add_service`, you can pass all of available [request options](#request-options). The meaning of this part is to organize in one way the external services integrations.
 
 ## Contributing
 
