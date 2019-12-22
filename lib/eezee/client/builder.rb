@@ -2,7 +2,7 @@
 
 module Eezee
   module Client
-    class UnknownService < StandardError; end
+    class UnknownServiceError < StandardError; end
 
     module Builder
       def self.extended(base)
@@ -51,7 +51,7 @@ module Eezee
 
       def handle_unknown_service!(service, force)
         return unless take_request?(force)
-        raise UnknownService if !service && eezee_options[:service_name]
+        raise UnknownServiceError if !service && eezee_options[:service_name]
 
         service
       end

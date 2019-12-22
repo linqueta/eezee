@@ -16,7 +16,7 @@ RSpec.describe 'Service' do
     it do
       expect(Eezee.configuration.services[:rickandmortyapi_904a9b]).to be_nil
       expect(klass.eezee_request_attributes).to eq({})
-      expect { klass.get }.to raise_error(Eezee::Client::UnknownService)
+      expect { klass.get }.to raise_error(Eezee::Client::UnknownServiceError)
     end
   end
 
