@@ -32,7 +32,7 @@ This gem is supported for Ruby 2.6+ applications.
     - [Available Request options](#available-request-options)
   - [Services](#services)
     - [How a service works](#how-a-service-works)
-  - [Request](#response)
+  - [Request](#request)
   - [Response](#response)
   - [Errors](#errors)
   - [Examples](#examples)
