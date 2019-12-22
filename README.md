@@ -155,6 +155,8 @@ module RickMorty::Resource::Character
 end
 ```
 
+The method `katinguele_request_options` can receive all of [Available request options](#available-request-options).
+
 When the HTTP methods were called, Katinguele has created a Request setting with the options defined in the module and merge with the options passed as a param in the HTTP methods.
 
 #### Available Request options
