@@ -155,7 +155,7 @@ module RickMorty::Resource::Character
 end
 ```
 
-The method `katinguele_request_options` can receive all of [Available request options](#available-request-options).
+The method `katinguele_request_options` can receive all of [Available Request options](#available-request-options).
 
 When the HTTP methods were called, Katinguele has created a Request setting with the options defined in the module and merge with the options passed as a param in the HTTP methods.
 
@@ -182,7 +182,7 @@ Here are the list of available options and about them:
 
 It's common your app has integrations with many external services and this gem has a feature to organize in one file the settings of these external service integrations and it provides an easy way to get these settings.
 
-For example, I want to integrate with [Rick and Morty Api](https://rickandmortyapi.com/api/):
+For example, I will integrate with [Rick and Morty Api](https://rickandmortyapi.com/api/) using a service:
 
 - I'll declare it in an initializer file:
 
@@ -190,7 +190,6 @@ For example, I want to integrate with [Rick and Morty Api](https://rickandmortya
 Katinguele.configure do |config|
   config.add_service :rick_morty_api,
                      protocol: :https,
-                     logger: true,
                      url: 'rickandmortyapi.com/api'
 end
 ```
@@ -198,7 +197,7 @@ end
 - In my resource, I'll catch the service and pass other settings:
 
 ```ruby
-module RickMorty::Resource::
+module RickMorty::Resource::Character
   extend Katinguele::Client
 
   katinguele_service :rick_morty_api
@@ -214,33 +213,11 @@ module RickMorty::Resource::
 end
 ```
 
-- Trying:
-
-```ruby
-RickMorty::Resource::Character.index
-# "INFO -- request: GET https://rickandmortyapi.com/api/character/"
-# "INFO -- request: HEADERS: {}"
-# "INFO -- request: PAYLOAD: {}"
-# "INFO -- response: SUCCESS: true"
-# "INFO -- response: TIMEOUT: false"
-# "INFO -- response: CODE: 200"
-# "INFO -- response: BODY: {\"info\":{\"count\": :493,\"pages\":25,\"next\":\"https://rickan...
-
-RickMorty::Resource::Character.find(7)
-# "INFO -- request: GET https://rickandmortyapi.com/api/character/7"
-# "INFO -- request: HEADERS: {}"
-# "INFO -- request: PAYLOAD: {}"
-# "INFO -- response: SUCCESS: true"
-# "INFO -- response: TIMEOUT: false"
-# "INFO -- response: CODE: 200"
-# "INFO -- response: BODY: {\"id\":7,\"name\":\"Abradolf Lincler\",\"status\":\"unknown\",...
-```
-
 #### How a service works
 
 When Ruby loads a class/module and it has the method `katinguele_service` declared with a service's name, by default, Katinguele will try load the service and create a request base for the class/module, so, when the class/module takes a request, Katinguele will create the final request instance based on request base to take the HTTP request. You can turn it lazy setting the option `lazy: true`, therefore, the final request will be created just in the HTTP request. If the service doesn't exist when Katinguele search about it, it will be raised the error `Katinguele::Client::UnknownService`.
 
-About the method `add_service`, you can pass all of available [Request options](#request-options). The meaning of this part is to organize in one way the external services integrations.
+About the method `add_service`, you can pass all of [Available Request options](#available-request-options). The meaning of this part is to organize in one way the external services integrations.
 
 ### Request
 
