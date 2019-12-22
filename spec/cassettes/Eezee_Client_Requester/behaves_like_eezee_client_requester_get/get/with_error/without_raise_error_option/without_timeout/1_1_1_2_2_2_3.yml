@@ -1,0 +1,47 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://rickandmortyapi.com/api/character/a
+    body:
+      encoding: UTF-8
+      string: "{}"
+    headers:
+      User-Agent:
+      - Faraday v0.17.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 500
+      message: Internal Server Error
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Length:
+      - '76'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 22 Dec 2019 21:38:59 GMT
+      Etag:
+      - W/"4c-3VjSig7CsSz0sYBt/LP+8dSwuKM"
+      Server:
+      - Netlify
+      X-Powered-By:
+      - Express
+      Age:
+      - '1'
+      Connection:
+      - keep-alive
+      X-Nf-Request-Id:
+      - 32c19587-d9de-43f8-b618-69a20fe967cc-11024071
+    body:
+      encoding: UTF-8
+      string: '{"error":"Hey! that parameter is not allowed, try with a number instead
+        ;)"}'
+    http_version: 
+  recorded_at: Sun, 22 Dec 2019 21:38:58 GMT
+recorded_with: VCR 5.0.0

@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://rickandmortyapi.com/api/character/7
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.17.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Length:
+      - '575'
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - max-age=3600
+      - public
+      Date:
+      - Sun, 22 Dec 2019 21:38:56 GMT
+      Etag:
+      - W/"23f-5B8N0z26AdjI4XpCbU59TJ26m2s"
+      Expires:
+      - Sun, 22 Dec 2019 22:38:56 GMT
+      Server:
+      - Netlify
+      X-Powered-By:
+      - Express
+      Age:
+      - '52'
+      Connection:
+      - keep-alive
+      X-Nf-Request-Id:
+      - 32c19587-d9de-43f8-b618-69a20fe967cc-11035656
+    body:
+      encoding: UTF-8
+      string: '{"id":7,"name":"Abradolf Lincler","status":"unknown","species":"Human","type":"Genetic
+        experiment","gender":"Male","origin":{"name":"Earth (Replacement Dimension)","url":"https://rickandmortyapi.com/api/location/20"},"location":{"name":"Testicle
+        Monster Dimension","url":"https://rickandmortyapi.com/api/location/21"},"image":"https://rickandmortyapi.com/api/character/avatar/7.jpeg","episode":["https://rickandmortyapi.com/api/episode/10","https://rickandmortyapi.com/api/episode/11"],"url":"https://rickandmortyapi.com/api/character/7","created":"2017-11-04T19:59:20.523Z"}'
+    http_version: 
+  recorded_at: Sun, 22 Dec 2019 21:39:46 GMT
+recorded_with: VCR 5.0.0

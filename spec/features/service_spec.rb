@@ -6,32 +6,32 @@ RSpec.describe 'Service' do
   context 'with lazy service but this server does not exist' do
     let!(:klass) do
       Class.new do
-        extend Katinguele::Client
+        extend Eezee::Client
 
-        katinguele_service :rickandmortyapi_904a9b, lazy: true
-        katinguele_request_options path: 'character/:character_id'
+        eezee_service :rickandmortyapi_904a9b, lazy: true
+        eezee_request_options path: 'character/:character_id'
       end
     end
 
     it do
-      expect(Katinguele.configuration.services[:rickandmortyapi_904a9b]).to be_nil
-      expect(klass.katinguele_request_attributes).to eq({})
-      expect { klass.get }.to raise_error(Katinguele::Client::UnknownService)
+      expect(Eezee.configuration.services[:rickandmortyapi_904a9b]).to be_nil
+      expect(klass.eezee_request_attributes).to eq({})
+      expect { klass.get }.to raise_error(Eezee::Client::UnknownService)
     end
   end
 
   context 'with lazy service but this server exists', :vcr do
     let!(:klass) do
       Class.new do
-        extend Katinguele::Client
+        extend Eezee::Client
 
-        katinguele_service :rickandmortyapi_d19e49, lazy: true
-        katinguele_request_options path: 'character/:character_id'
+        eezee_service :rickandmortyapi_d19e49, lazy: true
+        eezee_request_options path: 'character/:character_id'
       end
     end
 
     let!(:service) do
-      Katinguele.configure do |config|
+      Eezee.configure do |config|
         config.add_service :rickandmortyapi_d19e49,
                            url: 'rickandmortyapi.com/api',
                            params: { character_id: 7 },
@@ -42,7 +42,7 @@ RSpec.describe 'Service' do
     let(:get) { klass.get }
 
     it do
-      expect(Katinguele.configuration.services[:rickandmortyapi_d19e49])
+      expect(Eezee.configuration.services[:rickandmortyapi_d19e49])
         .to have_attributes(
           after: nil,
           before: nil,
@@ -57,8 +57,8 @@ RSpec.describe 'Service' do
           timeout: nil,
           url: 'rickandmortyapi.com/api'
         )
-      expect(klass.katinguele_request_attributes).to eq({})
-      expect(get).to be_a(Katinguele::Response)
+      expect(klass.eezee_request_attributes).to eq({})
+      expect(get).to be_a(Eezee::Response)
       expect(get.body).to eq(
         created: '2017-11-04T19:59:20.523Z',
         episode: ['https://rickandmortyapi.com/api/episode/10', 'https://rickandmortyapi.com/api/episode/11'],

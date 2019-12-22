@@ -2,15 +2,15 @@
 
 require 'rails/generators/base'
 
-module Katinguele
+module Eezee
   class InstallGenerator < Rails::Generators::Base
     def create_initializer_file
       create_file(
-        'config/initializers/katinguele.rb',
+        'config/initializers/eezee.rb',
         <<~KATINGUELE_INITIALIZER_TEXT
           # frozen_string_literal: true
 
-          Katinguele.configure do |config|
+          Eezee.configure do |config|
             # You can add your service's configuration, like:
 
             # config.add_service :external_service_1,
