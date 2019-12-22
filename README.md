@@ -248,7 +248,7 @@ In [Hooks](#hooks) and the return of the request you have an instance of `Eezee:
 
 ### Errors
 
-Eezee can raise errors in three situations:
+Eezee can raise errors in some situations:
   - When the specified service is unknown
   - When the request got a timeout
   - When the request got a failure response
@@ -258,6 +258,8 @@ Eezee can raise errors in three situations:
 
 #### When the request got a timeout
   - `Eezee::TimeoutError`
+
+**Important**: This case happens just if the request option `raise_error` is `true`.
 
 #### When the request got a failure response
   - `Eezee::RequestError` for all errors (ancestor of all below)
@@ -272,6 +274,8 @@ Eezee can raise errors in three situations:
   - `Eezee::ServerError` for code between 500 and 599
 
 All of `Eezee::RequestError` has the accessor `@response` with an instace of `Eezee::Response`.
+
+**Important**: This case happens just if the request option `raise_error` is `true`.
 
 ### Examples
 
