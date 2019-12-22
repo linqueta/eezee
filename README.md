@@ -299,7 +299,15 @@ Coming soon...
 
 ## Why use Eezee instead Faraday
 
-Coming soon...
+So, it's an important part of this README. This gem uses [Faraday](#https://github.com/lostisland/faraday) as the HTTP client and Faraday is an excellent HTTP client, but it brings many difficult, or, in other words, many things could be easier, like:
+
+- If you work with microservices, you'll create a Faraday Connection setting per ms, or, it's so common to see many Faraday Connection setting in the same project.
+- To raise errors with Faraday you know to set an adapter (it could be easier)
+- When we have a successful response or an error, the way to catch the params (code, body) is completely different
+- Faraday doesn't have any way to set the external services in an initializer, you'll have to create yours
+- At least, it's common in projects the people create files to instantiate Faraday Connection but these people don't test these files
+
+All of these things and others are contemplated by **Eezee**!
 
 ## Contributing
 
