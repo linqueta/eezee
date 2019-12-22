@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :request, class: Katinguele::Request do
+  factory :request, class: Eezee::Request do
     initialize_with { new(attributes) }
 
     after { ->(_req, _res, _err) { true } }
@@ -9,7 +9,7 @@ FactoryBot.define do
     logger { true }
     headers do
       {
-        'User-Agent' => 'Katinguele',
+        'User-Agent' => 'Eezee',
         Token: 'Token 2b173033-45fa-459a-afba-9eea79cb75be'
       }
     end

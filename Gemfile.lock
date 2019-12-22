@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    katinguele (1.0.6)
+    eezee (1.0.7)
       faraday (~> 0.17, >= 0.17.0)
 
 GEM
@@ -99,8 +99,8 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 2.0)
+  eezee!
   factory_bot (~> 5.1, >= 5.1.1)
-  katinguele!
   pry-byebug (~> 3.7, >= 3.7.0)
   rake (~> 10.0)
   rspec (~> 3.0)

@@ -1,13 +1,15 @@
-# [Katinguele][gem_page]
+# [Eezee][gem_page]
+
+*Eezee or ee-zee sounds like "Easy"*
 
 [![Gem Version][gem_version_image]][gem_version_page]
 [![Build Status][travis_status_image]][travis_page]
 [![Maintainability][code_climate_maintainability_image]][code_climate_maintainability_page]
 [![Test Coverage][code_climate_test_coverage_image]][code_climate_test_coverage_page]
 
-The easiest HTTP client for Ruby
+The easiest HTTP client for Ruby!
 
-With Katinguele you can do these things:
+With Eezee you can do these things:
   * Define external services in an initializer file and use them through a simple method
   * Take HTTP requests just extending a module and call the HTTP request method in your class/module
   * Set before and after hooks to handle your requests, responses, and errors
@@ -17,7 +19,9 @@ With Katinguele you can do these things:
   * Raise errors in failed requests
   * Spend more time coding your API integrations instead defining and testing HTTP settings and clients
 
-This gem is supported for Ruby 2.6+ applications
+This gem is supported for Ruby 2.6+ applications.
+
+
 
 ## Table of Contents
 - [Getting started](#getting-started)
@@ -36,7 +40,7 @@ This gem is supported for Ruby 2.6+ applications
     - [Hooks](#hooks)
     - [Timeout](#timeout)
     - [Logging](#logging)
-- [Why use Katinguele instead Faraday](#why-use-katinguele-instead-faraday)
+- [Why use Eezee instead Faraday](#why-use-eezee-instead-faraday)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -47,18 +51,18 @@ This gem is supported for Ruby 2.6+ applications
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'katinguele'
+gem 'eezee'
 ```
 
 If you're on Rails you can run this line below to create the initializer:
 
 ```shell
-rails generator katinguele:install
+rails generator eezee:install
 ```
 
 ### Supported HTTP Methods
 
-Katinguele supports these HTTP methods:
+Eezee supports these HTTP methods:
 
 - GET
 - POST
@@ -66,7 +70,7 @@ Katinguele supports these HTTP methods:
 - PUT
 - DELETE
 
-And here are the corresponding Katinguele's HTTP methods:
+And here are the corresponding Eezee's HTTP methods:
 
 - get(request_options)
 - post(request_options)
@@ -82,7 +86,7 @@ To take a request using any of these methods you just have to call the HTTP meth
 
 ```ruby
 module RickMorty::Resource::Character
-  extend Katinguele::Client
+  extend Eezee::Client
 
   def self.index
     get(url: 'rickandmortyapi.com/api', protocol: :https, path: 'character')
@@ -132,9 +136,9 @@ Request options are the request settings. They can be used to define services, r
 
 ```ruby
 module RickMorty::Resource::Character
-  extend Katinguele::Client
+  extend Eezee::Client
 
-  katinguele_request_options protocol: :https,
+  eezee_request_options protocol: :https,
                              url: 'rickandmortyapi.com/api'
                              path: 'character/:character_id'
 
@@ -156,9 +160,9 @@ module RickMorty::Resource::Character
 end
 ```
 
-The method `katinguele_request_options` can receive all of [Available Request options](#available-request-options).
+The method `eezee_request_options` can receive all of [Available Request options](#available-request-options).
 
-When the HTTP methods were called, Katinguele has created a Request setting with the options defined in the module and merge with the options passed as a param in the HTTP methods.
+When the HTTP methods were called, Eezee has created a Request setting with the options defined in the module and merge with the options passed as a param in the HTTP methods.
 
 #### Available Request options
 
@@ -174,9 +178,9 @@ Here are the list of available options and about them:
 | `payload` | No | `{}` | The request's payload | `{ name: "Linqueta", gender: "male" }` |
 | `before` | No | `nil` | It's the before hook. You can pass Proc or Lambda to handle the request settings. See more in [Hooks](#hooks).  | `->(req) { merge_new_headers! }` |
 | `after` | No | `nil` | It's the after hook. You can pass Proc or Lambda to handle the request settings, response or error after the request. If it returns a valid value (different of false or `nil`) and the request raises an error, the error won't be raised to your application. See more in [Hooks](#hooks). | `->(req, res, err) { do_something! }` |
-| `timeout` | No | `nil` | If it exceeds this timeout to make whole request Katinguele will raise the error `Katinguele::TimeoutError` | `5` |
-| `open_timeout` | No | `nil` | If it exceed this timeout to open a connection Katinguele will raise the error `Katinguele::TimeoutError` | `2` |
-| `raise_error` | No | `false` | If you want that Katinguele raises an error if the request has wasn't successful. See more in [Errors](#errors) | `true` |
+| `timeout` | No | `nil` | If it exceeds this timeout to make whole request Eezee will raise the error `Eezee::TimeoutError` | `5` |
+| `open_timeout` | No | `nil` | If it exceed this timeout to open a connection Eezee will raise the error `Eezee::TimeoutError` | `2` |
+| `raise_error` | No | `false` | If you want that Eezee raises an error if the request has wasn't successful. See more in [Errors](#errors) | `true` |
 | `logger` | No | `false` | If you want to log the request, response, and error | `true` |
 
 ### Services
@@ -188,7 +192,7 @@ For example, I will integrate with [Rick and Morty Api](https://rickandmortyapi.
 - I'll declare it in an initializer file:
 
 ```ruby
-Katinguele.configure do |config|
+Eezee.configure do |config|
   config.add_service :rick_morty_api,
                      protocol: :https,
                      url: 'rickandmortyapi.com/api'
@@ -199,10 +203,10 @@ end
 
 ```ruby
 module RickMorty::Resource::Character
-  extend Katinguele::Client
+  extend Eezee::Client
 
-  katinguele_service :rick_morty_api
-  katinguele_request_options path: 'character/:character_id'
+  eezee_service :rick_morty_api
+  eezee_request_options path: 'character/:character_id'
 
   def self.index
     get
@@ -216,7 +220,7 @@ end
 
 #### How a service works
 
-When Ruby loads a class/module and it has the method `katinguele_service` declared with a service's name, by default, Katinguele will try load the service and create a request base for the class/module, so, when the class/module takes a request, Katinguele will create the final request instance based on request base to take the HTTP request. You can turn it lazy setting the option `lazy: true`, therefore, the final request will be created just in the HTTP request. If the service doesn't exist when Katinguele search about it, it will be raised the error `Katinguele::Client::UnknownService`.
+When Ruby loads a class/module and it has the method `eezee_service` declared with a service's name, by default, Eezee will try load the service and create a request base for the class/module, so, when the class/module takes a request, Eezee will create the final request instance based on request base to take the HTTP request. You can turn it lazy setting the option `lazy: true`, therefore, the final request will be created just in the HTTP request. If the service doesn't exist when Eezee search about it, it will be raised the error `Eezee::Client::UnknownService`.
 
 About the method `add_service`, you can pass all of [Available Request options](#available-request-options). The meaning of this part is to organize in one way the external services integrations.
 
@@ -252,7 +256,7 @@ Coming soon...
 
 Coming soon...
 
-## Why use Katinguele instead Faraday
+## Why use Eezee instead Faraday
 
 Coming soon...
 
@@ -268,15 +272,15 @@ Coming soon...
 
 The gem is available as open source under the terms of the [MIT License][mit_license_page].
 
-[gem_page]: https://github.com/linqueta/katinguele
-[code_of_conduct_page]: https://github.com/linqueta/katinguele/blob/master/CODE_OF_CONDUCT.md
+[gem_page]: https://github.com/linqueta/eezee
+[code_of_conduct_page]: https://github.com/linqueta/eezee/blob/master/CODE_OF_CONDUCT.md
 [mit_license_page]: https://opensource.org/licenses/MIT
 [contributor_convenant_page]: http://contributor-covenant.org
-[travis_status_image]: https://travis-ci.org/linqueta/katinguele.svg?branch=master
-[travis_page]: https://travis-ci.org/linqueta/katinguele
+[travis_status_image]: https://travis-ci.org/linqueta/eezee.svg?branch=master
+[travis_page]: https://travis-ci.org/linqueta/eezee
 [code_climate_maintainability_image]: https://api.codeclimate.com/v1/badges/b3ae18295c290b6a92a9/maintainability
-[code_climate_maintainability_page]: https://codeclimate.com/github/linqueta/katinguele/maintainability
+[code_climate_maintainability_page]: https://codeclimate.com/github/linqueta/eezee/maintainability
 [code_climate_test_coverage_image]: https://api.codeclimate.com/v1/badges/b3ae18295c290b6a92a9/test_coverage
-[code_climate_test_coverage_page]: https://codeclimate.com/github/linqueta/katinguele/test_coverage
-[gem_version_image]: https://badge.fury.io/rb/katinguele.svg
-[gem_version_page]: https://rubygems.org/gems/katinguele
+[code_climate_test_coverage_page]: https://codeclimate.com/github/linqueta/eezee/test_coverage
+[gem_version_image]: https://badge.fury.io/rb/eezee.svg
+[gem_version_page]: https://rubygems.org/gems/eezee
