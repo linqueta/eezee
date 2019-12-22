@@ -226,11 +226,19 @@ About the method `add_service`, you can pass all of [Available Request options](
 
 ### Request
 
-Coming soon...
+In [Hooks](#hooks), you always receive the param request and it is an instance of `Katinguele::Request`. It has the same accessors than [Available Request options](#available-request-options).
 
 ### Response
 
-Coming soon...
+In [Hooks](#hooks) and the return of the request you have an instance of `Katinguele::Response`. This class can be used for successful and failed requests. Here are all methods you can call from a response:
+
+| Name | Type | What is it? |
+|------|------|-------------|
+| `original` | `Faraday::Response`, `Faraday::Error`, `Faraday::TimeoutError`, `Faraday::ConnectionFailed` or `Net::ReadTimeout` | `nil` | The instance that made the `Katinguele::Response`. |
+| `body` | `Hash` | The body response. It always is an instance of Hash (symbolized). If the response doesn't have a body response, the value will be `{}`. |
+| `success?` | Boolean (`TrueClass` or `FalseClass`) | If the request had a timeout error or response has the code 400+ the value will be `false`, else, the value will be `true`. |
+| `code` | `Integer` or `NilClass` | If the request had a timeout error the value will be `nil`, else, the value will be an integer. |
+| `timeout?` | Boolean (`TrueClass` or `FalseClass`) | If the request had a timeout error. |
 
 ### Errors
 
