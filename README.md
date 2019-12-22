@@ -35,7 +35,7 @@ With Katinguele you can do these things:
     - [Hooks](#hooks)
     - [Timeout](#timeout)
     - [Logging](#logging)
-- [Why use it instead Faraday](#why-use-it-instead-faraday)
+- [Why use Katinguele instead Faraday](#why-use-katinguele-instead-faraday)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -251,7 +251,7 @@ Coming soon...
 
 Coming soon...
 
-## Why use it instead Faraday
+## Why use Katinguele instead Faraday
 
 Coming soon...
 
