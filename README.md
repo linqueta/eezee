@@ -33,6 +33,7 @@ With Katinguele you can do these things:
   - [Examples](#examples)
     - [Complete integrations](#complete-integrations)
     - [Hooks](#hooks)
+    - [Timeout](#timeout)
     - [Logging](#logging)
 - [Why use it instead Faraday](#why-use-it-instead-faraday)
 - [Contributing](#contributing)
@@ -76,7 +77,7 @@ OBS: The param `request_options` is optional.
 
 ### How to take a request
 
-To take a request using any of these methods, you just have to call the method with the same name pass request params (optional). For example:
+To take a request using any of these methods you just have to call the HTTP method, and if you want, you can pass the options.
 
 ```ruby
 module RickMorty::Resource::Character
@@ -260,6 +261,10 @@ Here are some examples:
 Coming soon...
 
 #### Hooks
+
+Coming soon...
+
+### Timeout
 
 Coming soon...
 
