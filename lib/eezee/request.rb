@@ -82,6 +82,7 @@ module Eezee
       @params.filter { |k, _v| @uri.include?(":#{k}") }
              .each   { |k, v|  @uri.gsub!(":#{k}", v.to_s) }
              .then   { @uri.gsub!(/:[a-z_-]+/, '') }
+             .then   { @uri.gsub!(%r{/$}, '') }
     end
 
     def handle_query_params!
