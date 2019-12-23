@@ -283,7 +283,9 @@ Here are some examples:
 
 #### Complete integrations
 
-- [JsonPlaceHolder API without request options and service](https://gist.github.com/linqueta/a1ebe9bb598d2a66556019502e1eb433)
+- [Integrating with JsonPlaceHolder API and Go Rest API - With Service and Request options](https://gist.github.com/linqueta/b1c44cd3cca5e321893fdf3fa866c750)
+- [Integrating with JsonPlaceHolder API and Go Rest API - With Request options](https://gist.github.com/linqueta/7c9bf0988d2141c2f92aebe1b6613be5)
+- [Integrating with JsonPlaceHolder API and Go Rest API - Without Services and Request Options](https://gist.github.com/linqueta/a1ebe9bb598d2a66556019502e1eb433)
 
 #### Hooks
 
