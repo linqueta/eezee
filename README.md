@@ -283,7 +283,7 @@ Here are some examples:
 
 #### Complete integrations
 
-- JsonPlaceHolder API without request options and service - [Gist](#https://gist.github.com/linqueta/a1ebe9bb598d2a66556019502e1eb433)
+- [JsonPlaceHolder API without request options and service](https://gist.github.com/linqueta/a1ebe9bb598d2a66556019502e1eb433)
 
 #### Hooks
 
@@ -299,7 +299,7 @@ Coming soon...
 
 ## Why use Eezee instead Faraday
 
-So, it's an important part of this README. This gem uses [Faraday](#https://github.com/lostisland/faraday) as the HTTP client and Faraday is an excellent HTTP client, but it brings many difficult, or, in other words, many things could be easier, like:
+So, it's an important part of this README. This gem uses [Faraday](https://github.com/lostisland/faraday) as the HTTP client and Faraday is an excellent HTTP client, but it brings many difficult, or, in other words, many things could be easier, like:
 
 - If you work with microservices, you'll create a Faraday Connection setting per ms, or, it's so common to see many Faraday Connection setting in the same project.
 - To raise errors with Faraday you know to set an adapter (it could be easier)
