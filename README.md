@@ -1,6 +1,6 @@
 # [Eezee][gem_page]
 
-*Eezee or ee-zee sounds like "Easy"*
+*Eezee sounds like "Easy"*
 
 [![Gem Version][gem_version_image]][gem_version_page]
 [![Build Status][travis_status_image]][travis_page]
@@ -283,7 +283,7 @@ Here are some examples:
 
 #### Complete integrations
 
-Coming soon...
+- [JsonPlaceHolder API without request options and service](#https://gist.github.com/linqueta/a1ebe9bb598d2a66556019502e1eb433)
 
 #### Hooks
 
