@@ -43,6 +43,8 @@ module Eezee
 
     def parsed_body
       JSON.parse(handled_faraday_response, symbolize_names: true)
+    rescue StandardError
+      { response: faraday_response }
     end
 
     def success_response?

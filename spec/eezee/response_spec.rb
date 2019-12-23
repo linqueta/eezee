@@ -61,6 +61,14 @@ RSpec.describe Eezee::Response, type: :model do
 
         it { expect(body).to eq({}) }
       end
+
+      context 'with invalid faraday response' do
+        let(:param) { Faraday.get('https://rickandmortyapi.com/api/characters') }
+
+        before { allow_any_instance_of(described_class).to receive(:faraday_response).and_return('html') }
+
+        it { expect(body).to eq(response: 'html') }
+      end
     end
 
     context 'with faraday error' do
