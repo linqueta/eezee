@@ -283,7 +283,7 @@ Here are some examples:
 
 #### Complete integrations
 
-- [JsonPlaceHolder API without request options and service](#https://gist.github.com/linqueta/a1ebe9bb598d2a66556019502e1eb433)
+- JsonPlaceHolder API without request options and service - [Gist](#https://gist.github.com/linqueta/a1ebe9bb598d2a66556019502e1eb433)
 
 #### Hooks
 
