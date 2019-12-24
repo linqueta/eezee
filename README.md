@@ -38,7 +38,7 @@ This gem is supported for Ruby 2.6+ applications.
     - [Hooks](#hooks)
     - [Timeout](#timeout)
     - [Logging](#logging)
-- [Why use Eezee instead Faraday](#why-use-eezee-instead-faraday)
+- [The why to use Eezee instead Faraday](#the-why-to-use-Eezee-instead-faraday)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -137,8 +137,8 @@ module RickMorty::Resource::Character
   extend Eezee::Client
 
   eezee_request_options protocol: :https,
-                             url: 'rickandmortyapi.com/api'
-                             path: 'character/:character_id'
+                        url: 'rickandmortyapi.com/api'
+                        path: 'character/:character_id'
 
   def self.index
     get
@@ -289,7 +289,7 @@ Here are some examples:
 
 #### Hooks
 
-Coming soon...
+ - [Handling resource not found errors using after hook](https://gist.github.com/linqueta/32bf5c12f23d2cb3e8d456e468892943)
 
 #### Timeout
 
@@ -299,7 +299,7 @@ Coming soon...
 
 Coming soon...
 
-## Why use Eezee instead Faraday
+## The why to use Eezee instead Faraday
 
 So, it's an important part of this README. This gem uses [Faraday](https://github.com/lostisland/faraday) as the HTTP client and Faraday is an excellent HTTP client, but it brings many difficult, or, in other words, many things could be easier, like:
 
