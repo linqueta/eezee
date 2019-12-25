@@ -36,8 +36,6 @@ This gem is supported for Ruby 2.6+ applications.
   - [Examples](#examples)
     - [Complete integrations](#complete-integrations)
     - [Hooks](#hooks)
-    - [Timeout](#timeout)
-    - [Logging](#logging)
 - [The why to use Eezee instead Faraday](#the-why-to-use-Eezee-instead-faraday)
 - [Contributing](#contributing)
 - [License](#license)
@@ -289,15 +287,8 @@ Here are some examples:
 
 #### Hooks
 
- - [Handling resource not found errors using after hook](https://gist.github.com/linqueta/32bf5c12f23d2cb3e8d456e468892943)
-
-#### Timeout
-
-Coming soon...
-
-#### Logging
-
-Coming soon...
+- [Adding a header into the request using before hook](https://gist.github.com/linqueta/badce27997df7a594bf0e87db858e225)
+- [Handling resource not found errors using after hook](https://gist.github.com/linqueta/32bf5c12f23d2cb3e8d456e468892943)
 
 ## The why to use Eezee instead Faraday
 
