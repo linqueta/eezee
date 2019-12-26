@@ -59,12 +59,14 @@ module Eezee
 
       def build_faraday_request(req, client, method)
         client.send(method) do |faraday_req|
-          faraday_req.body = req.payload.to_json if req.payload
+          faraday_req.body = req.payload if req.payload
+          faraday_req.body = faraday_req.body.to_json if req.payload && req.url_encoded == false
         end
       end
 
       def build_faraday_client(request)
         Faraday.new(request.uri) do |config|
+          config.request :url_encoded if request.url_encoded
           config.use(Faraday::Response::RaiseError) if request.raise_error
           config.headers = request.headers if request.headers
           config.options[:open_timeout] = request.open_timeout if request.open_timeout

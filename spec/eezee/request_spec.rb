@@ -40,7 +40,8 @@ RSpec.describe Eezee::Request, type: :model do
           protocol: 'https',
           raise_error: true,
           timeout: 10,
-          url: 'www.linqueta.com'
+          url: 'www.linqueta.com',
+          url_encoded: true
         }
       end
 
@@ -96,7 +97,8 @@ RSpec.describe Eezee::Request, type: :model do
         protocol: 'https',
         raise_error: true,
         timeout: 10,
-        url: 'www.linqueta.com'
+        url: 'www.linqueta.com',
+        url_encoded: false
       )
     end
   end
