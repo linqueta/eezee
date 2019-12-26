@@ -15,6 +15,7 @@ module Eezee
       raise_error
       timeout
       url
+      url_encoded
     ].freeze
 
     DEFAULT = {
@@ -22,7 +23,8 @@ module Eezee
       logger: false,
       params: {},
       payload: {},
-      raise_error: false
+      raise_error: false,
+      url_encoded: false
     }.freeze
 
     attr_accessor(*(ACCESSORS | %i[uri method]))
