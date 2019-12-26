@@ -59,9 +59,15 @@ module Eezee
 
       def build_faraday_request(req, client, method)
         client.send(method) do |faraday_req|
-          faraday_req.body = req.payload if req.payload
-          faraday_req.body = faraday_req.body.to_json if req.payload && req.url_encoded == false
+          build_faraday_request_body(faraday_req, req)
         end
+      end
+
+      def build_faraday_request_body(faraday_req, req)
+        return unless req.payload
+
+        faraday_req.body = req.payload
+        faraday_req.body = faraday_req.body.to_json unless req.url_encoded
       end
 
       def build_faraday_client(request)
