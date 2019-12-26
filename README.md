@@ -53,7 +53,7 @@ gem 'eezee'
 If you're on Rails you can run this line below to create the initializer:
 
 ```shell
-rails generator eezee:install
+rails generate eezee:install
 ```
 
 ### Supported HTTP Methods
