@@ -178,6 +178,8 @@ Here are the list of available options and about them:
 | `open_timeout` | No | `nil` | If it exceed this timeout to open a connection Eezee will raise the error `Eezee::TimeoutError` | `2` |
 | `raise_error` | No | `false` | If you want that Eezee raises an error if the request has wasn't successful. See more in [Errors](#errors) | `true` |
 | `logger` | No | `false` | If you want to log the request, response, and error | `true` |
+| `url_encoded` | No | `false` | If you want to send request body as form_url_encoded | `true` |
+
 
 ### Services
 
