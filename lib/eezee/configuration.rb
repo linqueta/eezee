@@ -19,7 +19,10 @@ module Eezee
     end
 
     def request_by(request, options)
-      Request.new((request&.attributes || {}).merge(options || {}))
+      Marshal.dump(request&.attributes || {})
+             .then { |dumped| Marshal.load(dumped) } # rubocop:disable Security/MarshalLoad
+             .then { |attrs| attrs.merge(options || {}) }
+             .then { |attrs| Request.new(attrs) }
     end
   end
 end
