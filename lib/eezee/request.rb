@@ -58,10 +58,7 @@ module Eezee
       validate!
       build_urn!
       handle_query_params!
-
-      return if preserve_url_params
-
-      handle_urn_params!
+      handle_urn_params! unless @preserve_url_params
     end
 
     def hook!(hook, params)

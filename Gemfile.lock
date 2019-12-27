@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    eezee (1.0.11)
+    eezee (1.0.12)
       faraday (~> 0.17, >= 0.17.0)
 
 GEM
