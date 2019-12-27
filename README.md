@@ -170,7 +170,7 @@ Here are the list of available options and about them:
 | `protocol` | No | `nil` | The request's protocol | `:https` |
 | `path` | No | `nil` | The resource's path | `"characters\:characted_id\addresses"` |
 | `headers` | No | `{}` | The request's headers. | `{ Token: "Bearer 1a8then..." }` |
-| `params` | No | `{}` | The query params. If the url or path has a nested param like `:character_id` and you pass it in the hash, this value will be replaced. In the opposite, the value will be concatenated in the url like `...?character_id=10&...`| `{ character_id: 10 }`|
+| `params` | No | `{}` | The query params. If the url or path has a nested param like `:character_id` and you pass it in the hash, this value will be replaced. In the opposite, the value will be concatenated in the url like `...?character_id=10&...`| `{ character_id: 10 }` |
 | `payload` | No | `{}` | The request's payload | `{ name: "Linqueta", gender: "male" }` |
 | `before` | No | `nil` | It's the before hook. You can pass Proc or Lambda to handle the request settings. See more in [Hooks](#hooks).  | `->(req) { merge_new_headers! }` |
 | `after` | No | `nil` | It's the after hook. You can pass Proc or Lambda to handle the request settings, response or error after the request. If it returns a valid value (different of false or `nil`) and the request raises an error, the error won't be raised to your application. See more in [Hooks](#hooks). | `->(req, res, err) { do_something! }` |
@@ -179,6 +179,7 @@ Here are the list of available options and about them:
 | `raise_error` | No | `false` | If you want that Eezee raises an error if the request has wasn't successful. See more in [Errors](#errors) | `true` |
 | `logger` | No | `false` | If you want to log the request, response, and error | `true` |
 | `url_encoded` | No | `false` | If you want to send request body as form_url_encoded | `true` |
+| `preserve_url_params` | No | `false` | The query params will be preserved if the url or path has a nested param like `:character_id` this value will be not replaced | `true` |
 
 
 ### Services

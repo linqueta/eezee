@@ -16,6 +16,7 @@ module Eezee
       timeout
       url
       url_encoded
+      preserve_url_params
     ].freeze
 
     DEFAULT = {
@@ -24,7 +25,8 @@ module Eezee
       params: {},
       payload: {},
       raise_error: false,
-      url_encoded: false
+      url_encoded: false,
+      preserve_url_params: false
     }.freeze
 
     attr_accessor(*(ACCESSORS | %i[uri method]))
@@ -56,6 +58,9 @@ module Eezee
       validate!
       build_urn!
       handle_query_params!
+
+      return if preserve_url_params
+
       handle_urn_params!
     end
 
