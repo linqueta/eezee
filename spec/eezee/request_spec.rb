@@ -53,6 +53,29 @@ RSpec.describe Eezee::Request, type: :model do
         )
       end
     end
+
+    context 'with preserve_url_params field' do
+      let(:params) do
+        {
+          params: {
+            user_id: 10,
+            address_id: 15
+          },
+          path: 'users/:user_id=1/addresses/:address_id=15',
+          raise_error: true,
+          url: 'https://www.linqueta.com',
+          preserve_url_params: true
+        }
+      end
+
+      it do
+        is_expected.to have_attributes(
+          params.merge(
+            uri: 'https://www.linqueta.com/users/:user_id=1/addresses/:address_id=15'
+          )
+        )
+      end
+    end
   end
 
   describe '#log' do
@@ -98,7 +121,8 @@ RSpec.describe Eezee::Request, type: :model do
         raise_error: true,
         timeout: 10,
         url: 'www.linqueta.com',
-        url_encoded: false
+        url_encoded: false,
+        preserve_url_params: false
       )
     end
   end

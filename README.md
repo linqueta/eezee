@@ -179,6 +179,7 @@ Here are the list of available options and about them:
 | `raise_error` | No | `false` | If you want that Eezee raises an error if the request has wasn't successful. See more in [Errors](#errors) | `true` |
 | `logger` | No | `false` | If you want to log the request, response, and error | `true` |
 | `url_encoded` | No | `false` | If you want to send request body as form_url_encoded | `true` |
+| `preserve_url_params` | No | `false` | The query params will be preserved if the url or path has a nested param like `:character_id` this value will be not replaced | `true` |
 
 
 ### Services
