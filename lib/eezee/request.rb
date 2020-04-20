@@ -17,6 +17,7 @@ module Eezee
       url
       url_encoded
       preserve_url_params
+      ddtrace
     ].freeze
 
     DEFAULT = {
@@ -26,7 +27,8 @@ module Eezee
       payload: {},
       raise_error: false,
       url_encoded: false,
-      preserve_url_params: false
+      preserve_url_params: false,
+      ddtrace: {}
     }.freeze
 
     attr_accessor(*(ACCESSORS | %i[uri method]))
