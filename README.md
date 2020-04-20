@@ -180,7 +180,7 @@ Here are the list of available options and about them:
 | `logger` | No | `false` | If you want to log the request, response, and error | `true` |
 | `url_encoded` | No | `false` | If you want to send request body as form_url_encoded | `true` |
 | `preserve_url_params` | No | `false` | The query params will be preserved if the url or path has a nested param like `:character_id` this value will be not replaced | `true` |
-
+| `ddtrace` | No | `nil` | Support for [DataDog apm](http://gems.datadoghq.com/trace/docs/#Faraday) | `{}` |
 
 ### Services
 

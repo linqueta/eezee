@@ -72,13 +72,18 @@ module Eezee
 
       def build_faraday_client(request)
         Faraday.new(request.uri) do |config|
-          config.request :url_encoded if request.url_encoded
-          config.use(Faraday::Response::RaiseError) if request.raise_error
-          config.headers = request.headers if request.headers
-          config.options[:open_timeout] = request.open_timeout if request.open_timeout
-          config.options[:timeout] = request.timeout if request.timeout
-          config.adapter(Faraday.default_adapter)
+          faraday_client_options!(config, request)
         end
+      end
+
+      def faraday_client_options!(config, request)
+        config.request :url_encoded if request.url_encoded
+        config.use(Faraday::Response::RaiseError) if request.raise_error
+        config.headers = request.headers if request.headers
+        config.options[:open_timeout] = request.open_timeout if request.open_timeout
+        config.options[:timeout] = request.timeout if request.timeout
+        config.adapter(Faraday.default_adapter)
+        config.use(:ddtrace, request.ddtrace) if request.ddtrace.any?
       end
     end
   end

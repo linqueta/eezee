@@ -122,7 +122,8 @@ RSpec.describe Eezee::Request, type: :model do
         timeout: 10,
         url: 'www.linqueta.com',
         url_encoded: false,
-        preserve_url_params: false
+        preserve_url_params: false,
+        ddtrace: {}
       )
     end
   end
