@@ -28,7 +28,7 @@ module Eezee
           .tap  { |response| request.after!(request, response, nil) }
       rescue Faraday::Error => e
         response = Eezee::Response.new(e)
-        error = Eezee::RequestErrorFactory.build(response)
+        error = Eezee::RequestErrorFactory.build(request, response)
         error.log if request.logger
         return response if rescue_faraday_error?(request, response, error)
 

@@ -2,7 +2,9 @@
 
 RSpec.describe Eezee::RequestErrorFactory, type: :model do
   describe '.build', :vcr do
-    subject { described_class.build(original) }
+    subject { described_class.build(request, original) }
+
+    let(:request) { build :request }
 
     context 'with timeout error' do
       let(:original) { Eezee::Response.new(Faraday::TimeoutError.new) }

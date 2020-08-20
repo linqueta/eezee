@@ -3,10 +3,10 @@
 module Eezee
   class RequestErrorFactory
     class << self
-      def build(response)
+      def build(request, response)
         return TimeoutError.new(response) if response.timeout?
 
-        find_by_code(response.code).new(response)
+        find_by_code(response.code).new(request, response)
       end
 
       private

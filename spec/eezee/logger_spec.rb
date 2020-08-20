@@ -70,8 +70,9 @@ RSpec.describe Eezee::Logger, type: :model do
   describe '.response' do
     subject { Eezee::Logger.error(error) }
 
-    let(:error) { Eezee::ResourceNotFoundError.new(response) }
+    let(:error) { Eezee::ResourceNotFoundError.new(request, response) }
     let(:response) { Eezee::Response.new(nil) }
+    let(:request) { build :request }
 
     before do
       allow(response).to receive(:body).and_return(error: 'some error')

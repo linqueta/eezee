@@ -2,9 +2,10 @@
 
 module Eezee
   class RequestError < Error
-    attr_reader :response
+    attr_reader :response, :request
 
-    def initialize(response = nil)
+    def initialize(request = nil, response = nil)
+      @request = request
       @response = response
       super(build_message)
     end
@@ -16,7 +17,7 @@ module Eezee
     private
 
     def build_message
-      "CODE: #{@response&.code} - BODY: #{@response&.body&.to_json}"
+      "CODE: #{@response&.code} - URI: #{@request&.uri} - BODY: #{@response&.body&.to_json}"
     end
   end
 
