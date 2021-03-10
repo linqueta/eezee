@@ -70,6 +70,8 @@ module Eezee
     end
 
     def validate!
+      return if ENV['EEZEE_DISCARD_REQUEST_VALIDATIONS']
+
       raise Eezee::RequiredFieldError.new(self.class, :url) unless @url
     end
 
