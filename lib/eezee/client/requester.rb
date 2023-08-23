@@ -8,6 +8,12 @@ module Eezee
     module Requester
       METHODS = %i[get post patch put delete].freeze
 
+       RETRY_EXCEPTIONS = [
+        *Faraday::Retry::Middleware::DEFAULT_EXCEPTIONS,
+        Errno::ECONNRESET,
+        Faraday::ConnectionFailed
+       ].uniq.freeze
+
       def self.extended(base)
         METHODS.each do |method|
           base.send(
@@ -76,8 +82,9 @@ module Eezee
         end
       end
 
-      def faraday_client_options!(config, request)
+      def faraday_client_options!(config, request) # rubocop:disable Metrics
         config.request :url_encoded if request.url_encoded
+        config.use Faraday::Request::Retry, **retry_options
         config.use(Faraday::Response::RaiseError) if request.raise_error
         config.headers = request.headers if request.headers
         config.options[:open_timeout] = request.open_timeout if request.open_timeout
@@ -85,6 +92,16 @@ module Eezee
         config.adapter(Faraday.default_adapter)
         config.use(:ddtrace, request.ddtrace) if request.ddtrace.any?
       end
+    end
+
+    def retry_options
+      {
+        exceptions: RETRY_EXCEPTIONS,
+        interval: 0.5,
+        interval_randomness: 0.5,
+        max_interval: 60,
+        backoff_factor: 2
+      }
     end
   end
 end
