@@ -5,7 +5,7 @@ FactoryBot.define do
     initialize_with { new(attributes) }
 
     after { ->(_req, _res, _err) { true } }
-    before { ->(_req, _res, _err) { nil } }
+    before { ->(_req, _res, _err) {} }
     logger { true }
     headers do
       {

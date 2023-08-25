@@ -36,7 +36,7 @@ module Eezee
         build_eezee_request
       end
 
-      def build_eezee_request(force = false)
+      def build_eezee_request(force: false)
         Eezee.configuration
              .find_service(eezee_options[:service_name])
              .then { |service| handle_unknown_service!(service, force) }

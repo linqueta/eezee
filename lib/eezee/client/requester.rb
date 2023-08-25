@@ -57,7 +57,7 @@ module Eezee
       def build_eezee_request_lazy
         return unless eezee_options.dig(:service_options, :lazy)
 
-        build_eezee_request(true)
+        build_eezee_request(force: true)
       end
 
       def rescue_faraday_error?(req, res, err)

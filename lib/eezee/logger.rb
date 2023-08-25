@@ -4,6 +4,7 @@ module Eezee
   module Logger
     module_function
 
+    # rubocop:disable Metrics/AbcSize
     def request(req, method)
       p log("request: #{method} #{req.uri}")
       p log("request: HEADERS: #{req.headers&.to_json}") if req.headers
@@ -29,5 +30,6 @@ module Eezee
     def log(message)
       "INFO -- #{message}"
     end
+    # rubocop:enable Metrics/AbcSize
   end
 end
