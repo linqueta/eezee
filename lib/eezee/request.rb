@@ -64,7 +64,7 @@ module Eezee
     end
 
     def hook!(hook, params)
-      return unless send(hook)&.is_a?(Proc)
+      return unless send(hook).is_a?(Proc)
 
       send(hook).call(*params[0..(send(hook).parameters.length - 1)])
     end

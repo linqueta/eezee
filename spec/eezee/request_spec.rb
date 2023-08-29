@@ -16,7 +16,7 @@ RSpec.describe Eezee::Request, type: :model do
       let(:params) do
         {
           after: ->(_service, _response) { true },
-          before: ->(_service) { nil },
+          before: ->(_service) {},
           logger: true,
           headers: {
             'User-Agent' => 'Eezee',

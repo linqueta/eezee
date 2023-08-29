@@ -15,7 +15,7 @@ class VCRConfig
       config.configure_rspec_metadata!
 
       FILTER.each do |env|
-        config.filter_sensitive_data("ENV[#{env}]") { ENV[env] }
+        config.filter_sensitive_data("ENV[#{env}]") { ENV.fetch(env, nil) }
       end
     end
   end
