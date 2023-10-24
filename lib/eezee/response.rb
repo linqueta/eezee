@@ -2,10 +2,15 @@
 
 require 'json'
 require 'faraday'
+require 'forwardable'
 
 module Eezee
   class Response
     attr_reader :original
+
+    extend Forwardable
+
+    def_delegator :body, :[]
 
     def initialize(original)
       @original = original
