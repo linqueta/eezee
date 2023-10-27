@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'json'
+require 'oj'
 require 'faraday'
 require 'forwardable'
 
@@ -47,17 +47,16 @@ module Eezee
     private
 
     def parsed_body
-      JSON.parse(handled_faraday_response, symbolize_names: true)
+      response = faraday_response
+      return {} if response.nil? || response.empty?
+
+      Oj.load(response, symbol_keys: true)
     rescue StandardError
-      { response: faraday_response }
+      { response: response }
     end
 
     def success_response?
       @original.is_a?(Faraday::Response)
-    end
-
-    def handled_faraday_response
-      faraday_response.nil? || faraday_response.empty? ? '{}' : faraday_response
     end
 
     def faraday_response
