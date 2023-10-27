@@ -20,5 +20,6 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'faraday', '>= 2.7'
   spec.add_runtime_dependency 'faraday-retry'
+  spec.add_runtime_dependency 'oj'
   spec.metadata['rubygems_mfa_required'] = 'true'
 end
