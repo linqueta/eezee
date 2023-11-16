@@ -18,6 +18,7 @@ module Eezee
       url_encoded
       preserve_url_params
       ddtrace
+      max_retries
     ].freeze
 
     DEFAULT = {
@@ -28,7 +29,8 @@ module Eezee
       raise_error: false,
       url_encoded: false,
       preserve_url_params: false,
-      ddtrace: {}
+      ddtrace: {},
+      max_retries: 2
     }.freeze
 
     attr_accessor(*(ACCESSORS | %i[uri method]))

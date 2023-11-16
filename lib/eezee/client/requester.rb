@@ -85,7 +85,9 @@ module Eezee
 
       def faraday_client_options!(config, request) # rubocop:disable Metrics
         config.request :url_encoded if request.url_encoded
-        config.use Faraday::Retry::Middleware, **retry_options
+        if request.max_retries.positive?
+          config.use(Faraday::Retry::Middleware, **retry_options(max: request.max_retries))
+        end
         config.use(Faraday::Response::RaiseError) if request.raise_error
         config.headers = request.headers if request.headers
         config.options[:open_timeout] = request.open_timeout if request.open_timeout
@@ -94,14 +96,15 @@ module Eezee
         config.use(:ddtrace, request.ddtrace) if request.ddtrace.any?
       end
 
-      def retry_options
+      def retry_options(opts = {})
         {
           exceptions: RETRY_EXCEPTIONS,
           interval: 0.5,
           interval_randomness: 0.5,
           max_interval: 60,
-          backoff_factor: 2
-        }
+          backoff_factor: 2,
+          max: 2
+        }.merge(opts)
       end
     end
   end

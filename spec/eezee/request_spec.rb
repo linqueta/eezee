@@ -123,7 +123,8 @@ RSpec.describe Eezee::Request, type: :model do
         url: 'www.linqueta.com',
         url_encoded: false,
         preserve_url_params: false,
-        ddtrace: {}
+        ddtrace: {},
+        max_retries: 2
       )
     end
   end
