@@ -74,7 +74,11 @@ module Eezee
         return unless req.payload
 
         faraday_req.body = req.payload
-        faraday_req.body = faraday_req.body.to_json unless req.url_encoded
+
+        return if req.url_encoded
+        return if req.headers[:"Content-Type"] != 'application/json'
+
+        faraday_req.body = faraday_req.body.to_json
       end
 
       def build_faraday_client(request)
